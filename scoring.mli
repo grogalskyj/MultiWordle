@@ -15,7 +15,7 @@ feature a '_' if the given letter in the input string is not in correct_word.
 val give_feedback : state -> string
 (** [give_feedback game_state] generates a string informing the user how their guess
 was scored against the correct word. The output string will be 
-"You guess" + word guessed + ", our output is the following: " + scored output
+"You guessed" + word guessed + ", our output is the following: " + scored output
 + ". You have " + guesses remaining + " guesses remaining."*)
 
 val game_over : state -> string
