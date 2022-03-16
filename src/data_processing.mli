@@ -10,4 +10,9 @@
   (*randomly chooses one string from string list*)
   
   val generate_word_bank : Yojson.Basic.t -> int -> string list
+
   (*generates of string list of all words in dictionary of length n (where n is 3<n<30) based on user input*)
+
+
+  val check_start_game : char -> bool
+  (*Checks if user has initialized Wordle game*)

@@ -12,10 +12,14 @@ feature a '_' if the given letter in the input string is not in correct_word.
   score_input "lover" "ocean" will output "o _ e _ _",
   score input_ "lover" "cover" will output "_ O V E R" *)
 
-val give_feedback : State.state -> string
-(** [give_feedback state] generates a string informing the user how their guess
+val give_feedback : state -> string
+(** [give_feedback game_state] generates a string informing the user how their guess
 was scored against the correct word. The output string will be 
 "You guess" + word guessed + ", our output is the following: " + scored output
 + ". You have " + guesses remaining + " guesses remaining."*)
 
-
+val game_over : state -> string
+(** [game_over game_state] generates a string informing the user if the game 
+  is over, and whether they won or lost. The game is only over if the 
+    user either guesses the word or runs out of lives. [game_over game_state]
+should also tell the user what the correct word was when the game is finished.*)

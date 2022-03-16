@@ -1,8 +1,5 @@
 
 
-
-
-
 let check_start_game (user_input : char) : bool = if user_input = 's' then true else false 
 
   
@@ -15,6 +12,5 @@ match dic with
 let generate_word_bank (dic :Yojson.Basic.t)(num_letters :int ) = query_dic (Yojson.Basic.Util.to_assoc dic) (num_letters)
 
 
-
-(* let choose_random_word (dic_list : string list) =  *)
+let choose_random_word (dic_list : string list) : string = List.nth(dic_list)( Random.int (List.length dic_list))
 
