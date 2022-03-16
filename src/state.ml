@@ -1,5 +1,6 @@
-open Data_processing
 open Scoring
+open Data_processing
+
 
 type state = {word : string; remaining_guesses : int; curr_guess : string}
 

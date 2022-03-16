@@ -1,3 +1,5 @@
+open Data_processing
+open State
 let rec score_input user_input correct_word start_index = 
   match user_input with
   | "" -> ""
