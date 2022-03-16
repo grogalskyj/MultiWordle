@@ -1,1 +1,1 @@
-scoring.mli: State
+scoring.mli:
