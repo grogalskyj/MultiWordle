@@ -1,0 +1,10 @@
+(** @canonical Game.Data_processing *)
+module Data_processing = Game__Data_processing
+
+
+(** @canonical Game.Scoring *)
+module Scoring = Game__Scoring
+
+
+(** @canonical Game.State *)
+module State = Game__State
