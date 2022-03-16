@@ -1,5 +1,5 @@
-val score_input : string -> string -> string
-(** [score_input user_input correct_word] generates an output string that 
+val score_input : string -> string -> int -> string
+(** [score_input user_input correct_word start_index] generates an output string that 
 indicates the correctness of the input string. The output string will be 
 generated based on three cases. 1). The output string will feature an uppercase 
 character if the input string has the same character and in the same index of 
@@ -18,8 +18,8 @@ was scored against the correct word. The output string will be
 "You guessed" + word guessed + ", our output is the following: " + scored output
 + ". You have " + guesses remaining + " guesses remaining."*)
 
-val game_over : state -> string
-(** [game_over game_state] generates a string informing the user if the game 
+val feedback_helper : string -> string -> int -> string -> string
+(** [game_over user_input correct_word lives feedback] generates a string informing the user if the game 
   is over, and whether they won or lost. The game is only over if the 
-    user either guesses the word or runs out of lives. [game_over game_state]
+    user either guesses the word or runs out of lives. [game_over]
 should also tell the user what the correct word was when the game is finished.*)
