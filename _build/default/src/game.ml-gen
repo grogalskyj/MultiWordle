@@ -1,3 +1,7 @@
+(** @canonical Game.Author *)
+module Author = Game__Author
+
+
 (** @canonical Game.Data_processing *)
 module Data_processing = Game__Data_processing
 
