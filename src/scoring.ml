@@ -19,6 +19,13 @@ let rec score_input user_input correct_word start_index =
     (String.sub (correct_word) (start_index+1) ((String.length (correct_word))-1)) (start_index+1)
 
 
+    let feedback_helper user_input correct_word lives feedback= function
+  | "OUT OF LIVES" -> "You guessed "^user_input^". The correct word was "^correct_word^". You are out of lives. GAME OVER."
+  | "YOU WIN" -> "You guessed the word "^correct_word^" with " ^string_of_int lives^" lives remaining. YOU WIN!"
+  | "KEEP GOING" ->"You guessed the word "^user_input^". Here is your feedback: "^feedback^". You have "^string_of_int lives^" lives remaining."
+  | _ -> "Something weird happened here..."
+
+
 let give_feedback game_state user_input correct_word = 
   if game_state.remaining_guesses = 0 then feedback_helper "OUT OF LIVES" else
     if game_state.remaining_guesses >= 0 && String.lowercase_ascii user_input <> String.lowercase_ascii correct_word then
@@ -34,10 +41,6 @@ let give_feedback game_state user_input correct_word =
     KEEP GOING: You guessed ___. Here is your feedback: ___. You have ___ guesses remaining.
     
     *)
-let feedback_helper user_input correct_word lives feedback= function
-  | "OUT OF LIVES" -> "You guessed "^user_input^". The correct word was "^correct_word^". You are out of lives. GAME OVER."
-  | "YOU WIN" -> "You guessed the word "^correct_word^" with "lives.to_String^" lives remaining. YOU WIN!"
-  | "KEEP GOING" ->"You guessed the word "^user_input^". Here is your feedback: "^feedback^". You have "^lives.to_String^" lives remaining."
     
   
  
