@@ -1,4 +1,4 @@
-val score_input : string -> string-> int -> string
+(* val score_input : string -> string-> int -> string *)
 (** [score_input user_input correct_word] generates an output string that 
 indicates the correctness of the input string. The output string will be 
 generated based on three cases. 1). The output string will feature an uppercase 

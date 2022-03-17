@@ -1,1 +1,1 @@
-src/scoring.ml: String
+src/scoring.ml:

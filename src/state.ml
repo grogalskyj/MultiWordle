@@ -12,7 +12,7 @@ type game_status =
 let game_over : string = let state =  "The GAME is Over. " in state
 
 let init_game_state (num_letters : int) : state =
-  {word = num_letters |> generate_word_bank (Yojson.Basic.from_file "dictionary/dictionary.json") |> choose_random_word;
+  {word = num_letters |> generate_word_bank (Yojson.Basic.from_file "dictionary.json") |> choose_random_word;
   remaining_guesses = 6; curr_guess = ""}
 let update_game_state (game_state : state) (new_guess : string) : state =
   {word = game_state.word; 
