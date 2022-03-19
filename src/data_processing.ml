@@ -1,5 +1,3 @@
-
-
 let check_start_game (user_input : char) : bool = if user_input = 's' then true else false 
 
   
