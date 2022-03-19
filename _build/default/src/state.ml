@@ -10,7 +10,6 @@ type game_status =
 | GameOver
 
 let game_over : string = let state =  "The GAME is Over. " in state
-
 let init_game_state (num_letters : int) : state =
   {word = num_letters |> generate_word_bank (Yojson.Basic.from_file "dictionary.json") |> choose_random_word;
   remaining_guesses = 6; curr_guess = ""}
@@ -23,3 +22,8 @@ let check_game_over (game_state : state) : bool =
     let _ = game_over in true
   else if game_state.remaining_guesses = 0 then true
   else false
+
+let to_string (game_state : state) : string =
+  "Word: " ^ game_state.word ^ " | Remaining Guesses: "
+    ^ string_of_int game_state.remaining_guesses ^ " | Current Guess: " 
+    ^ game_state.curr_guess

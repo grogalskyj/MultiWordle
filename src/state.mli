@@ -25,9 +25,11 @@ val check_game_over : state -> bool
 (** [check_game_over st] is true if the player has guessed the word or has no
   remaining guesses. It is false otherwise. *)
 
-
 val game_over:  string
-(** [game_over game_state] generates a string informing the user if the game 
+(** [game_over game_state] is a string informing the user if the game 
   is over, and whether they won or lost. The game is only over if the 
     user either guesses the word or runs out of lives. [game_over game_state]
 should also tell the user what the correct word was when the game is finished.*)
+
+val to_string : state -> string
+(** [to_string s] is a string representation of a state*)
