@@ -23,3 +23,5 @@ let main () =
  match read_line () with
  | "s" -> play_game ()
  | _ -> print_endline "You did not enter a valid command"
+
+ let () = main ()
