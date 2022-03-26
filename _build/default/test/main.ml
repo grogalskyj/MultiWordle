@@ -3,16 +3,8 @@ open OUnit2
 open Game
 open Scoring
 open State
-<<<<<<< HEAD
 open Data_processing
 
-
-(* open Data_processing
-
-open State *)
-
-=======
->>>>>>> d4b4750414e23cbd281d51cc5d96d7be58a15e60
 
 (** [score_input_test name user_input correct_word start_index expected_output] constructs 
 an OUnit test named [name] that assets the quality of [expected_output] with 
@@ -59,11 +51,7 @@ check_start_game_tst
 "This tests that if the user doesn't pass in s, the game does not start" 'b' false;
 generate_word_bank_test "Tests if all words generated in list are of length 5" word_bank 5 true;
 generate_word_bank_test "Tests for really long strinngs are all same lenght" word_bank 14 true;
-choose_random_word_test "Check if words are they same... they shouldn't be..." (dic) false;
-
-
-
-]
+choose_random_word_test "Check if words are they same... they shouldn't be..." (dic) false;]
 
   let word_length = 5
   let st1 = init_game_state word_length
@@ -87,28 +75,14 @@ choose_random_word_test "Check if words are they same... they shouldn't be..." (
   ]
   let suite =
     "test suite for MultiWordle"
-<<<<<<< HEAD
-    >::: List.flatten [ score_input_tests;
-    data_processing_tests]
-=======
     >::: List.flatten [ score_input_tests; state_tests]
->>>>>>> d4b4750414e23cbd281d51cc5d96d7be58a15e60
   
   let _ = run_test_tt_main suite
 
   (* Testing for state *)
-<<<<<<< HEAD
-  let word_length = 5
-  let st = init_game_state word_length
-
-  let state_tests = [
-    ("The word in newly-initiated state is of the proper length" >:: fun _ -> assert_equal word_length (String.length st.word));
-    ("The remaining guesses of newly-initiated state is 6" >:: fun _ -> assert_equal 6 st.remaining_guesses);
-    ("The current guess of newly-initiated state is the empty string" >:: fun _ -> assert_equal "" st.curr_guess);
-  ]
-=======
   
 
   
 
->>>>>>> d4b4750414e23cbd281d51cc5d96d7be58a15e60
+
+  

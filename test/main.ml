@@ -51,7 +51,7 @@ check_start_game_tst
 "This tests that if the user doesn't pass in s, the game does not start" 'b' false;
 generate_word_bank_test "Tests if all words generated in list are of length 5" word_bank 5 true;
 generate_word_bank_test "Tests for really long strinngs are all same lenght" word_bank 14 true;
-choose_random_word_test "Check if words are they same... they shouldn't be..." (dic) false;
+choose_random_word_test "Check if words are they same... they shouldn't be..." (dic) false;]
 
   let word_length = 5
   let st1 = init_game_state word_length
