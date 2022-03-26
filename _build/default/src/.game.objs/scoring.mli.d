@@ -1,1 +1,1 @@
-src/scoring.mli: State
+src/scoring.mli:

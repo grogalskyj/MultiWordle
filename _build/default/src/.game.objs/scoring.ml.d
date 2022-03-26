@@ -1,1 +1,1 @@
-src/scoring.ml: State String
+src/scoring.ml: List String
