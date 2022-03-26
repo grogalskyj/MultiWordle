@@ -12,5 +12,5 @@ cloc:
 clean:
 	dune clean
 
-test:
+tests:
 	OCAMLRUNPARAM=b dune exec test/main.exe
