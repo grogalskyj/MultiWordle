@@ -1,0 +1,92 @@
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Runner: processes
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Chooser: simple
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration suite_name = "test suite for MultiWordle"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration cache_filename = "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/oUnit-$(suite_name).cache"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration run_gc_full_major = "true"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration display = "true"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration results_style_1_X = "false"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration testdata_dir = "none"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration health_check_interval = "1."
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration verbose = "false"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration chooser = "simple"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration output_html_dir = "none"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration processes_kill_period = "5."
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration runner = "processes"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration shards = "4"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration processes_grace_period = "5."
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration log_encoding = "utf-8"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration output_junit_file = "none"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration ci = "false"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Configuration output_file = "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/oUnit-$(suite_name)-$(shard_id).log"
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Using 4 workers maximum.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Starting worker number DESKTOP-VMOGRUJ#01.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#01 started.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Starting worker number DESKTOP-VMOGRUJ#02.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#02 started.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Starting worker number DESKTOP-VMOGRUJ#03.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#03 started.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Starting worker number DESKTOP-VMOGRUJ#04.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#04 started.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 4 tests running: test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5, test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start, test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: Start test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Start test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#03 I: Start test test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 4 tests running: test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5, test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start, test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#04 I: Start test test suite for MultiWordle:3:Tests for really long strinngs are all same lenght.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 4 tests running: test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5, test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start, test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: Test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 4 tests running: test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5, test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start, test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: End test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: End test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 4 tests running: test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5, test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start, test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 3 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 3 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Start test test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 3 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 3 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#03 I: Test test suite for MultiWordle:2:Tests if all words generated in list are of length 5 is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#04 I: Test test suite for MultiWordle:3:Tests for really long strinngs are all same lenght is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 3 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 3 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#03 I: End test test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#04 I: End test test suite for MultiWordle:3:Tests for really long strinngs are all same lenght.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 3 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 3 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be..., test suite for MultiWordle:3:Tests for really long strinngs are all same lenght, test suite for MultiWordle:2:Tests if all words generated in list are of length 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 1 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 1 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Test test suite for MultiWordle:4:Check if words are they same... they shouldn't be... is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 1 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 1 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: End test test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Still 1 tests running : test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 1 tests running: test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: 0 tests running: .
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#01 has ended.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#03 has ended.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#04 has ended.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Worker DESKTOP-VMOGRUJ#02 has ended.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Used 4 worker during test execution.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Run 1 tests with shard DESKTOP-VMOGRUJ#01.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Run 2 tests with shard DESKTOP-VMOGRUJ#02.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Run 1 tests with shard DESKTOP-VMOGRUJ#04.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Run 1 tests with shard DESKTOP-VMOGRUJ#03.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Check health of shard DESKTOP-VMOGRUJ#01, 8 times.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Check health of shard DESKTOP-VMOGRUJ#02, 1 times.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Check health of shard DESKTOP-VMOGRUJ#04, 4 times.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Check health of shard DESKTOP-VMOGRUJ#03, 4 times.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: ==============
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Summary:
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Test test suite for MultiWordle:4:Check if words are they same... they shouldn't be... is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Test test suite for MultiWordle:3:Tests for really long strinngs are all same lenght is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Test test suite for MultiWordle:2:Tests if all words generated in list are of length 5 is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Ran: 5 tests in: 0.12 seconds.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Cases: 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Tried: 5.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Errors: 0.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Failures: 0.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Skip: 0.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Todo: 0.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#00 I: Timeout: 0.

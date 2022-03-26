@@ -1,0 +1,3 @@
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: Start test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: Test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#01 I: End test test suite for MultiWordle:0:This tests the specification that if the user wants to start the game by pressing 's', the function returns true.

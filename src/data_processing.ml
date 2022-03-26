@@ -10,3 +10,5 @@ let generate_word_bank (dic :Yojson.Basic.t)(num_letters :int ) = query_dic (Yoj
 let choose_random_word (dic_list : string list) : string =
   let _ = Random.self_init() in
   List.nth(dic_list)(Random.int (List.length dic_list))
+
+  

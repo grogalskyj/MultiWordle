@@ -1,0 +1,6 @@
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Start test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: End test test suite for MultiWordle:1:This tests that if the user doesn't pass in s, the game does not start.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Start test test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: Test test suite for MultiWordle:4:Check if words are they same... they shouldn't be... is successful.
+2022-03-26T17:32:12+00:00 DESKTOP-VMOGRUJ#02 I: End test test suite for MultiWordle:4:Check if words are they same... they shouldn't be....
