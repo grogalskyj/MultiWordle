@@ -1,6 +1,7 @@
 open OUnit2
 open Game
 open Scoring
+open State
 
 (* open Data_processing
 
@@ -30,3 +31,13 @@ let score_input_tests =
     >::: List.flatten [ score_input_tests;]
   
   let _ = run_test_tt_main suite
+
+  (* Testing for state *)
+  let word_length = 5
+  let st = init_game_state word_length
+
+  let state_tests = [
+    ("The word in newly-initiated state is of the proper length" >:: fun _ -> assert_equal word_length (String.length st.word));
+    ("The remaining guesses of newly-initiated state is 6" >:: fun _ -> assert_equal 6 st.remaining_guesses);
+    ("The current guess of newly-initiated state is the empty string" >:: fun _ -> assert_equal "" st.curr_guess);
+  ]
