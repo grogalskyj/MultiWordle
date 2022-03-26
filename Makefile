@@ -1,3 +1,5 @@
+.PHONY: test check
+
 build:
 	dune build
 
@@ -10,5 +12,5 @@ cloc:
 clean:
 	dune clean
 
-tests:
+test:
 	OCAMLRUNPARAM=b dune exec test/main.exe
