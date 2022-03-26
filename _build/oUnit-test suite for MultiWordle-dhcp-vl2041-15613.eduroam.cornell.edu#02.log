@@ -1,0 +1,15 @@
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Start test test suite for MultiWordle:1:The remaining guesses of newly-initiated state is 6.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Test test suite for MultiWordle:1:The remaining guesses of newly-initiated state is 6 is successful.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: End test test suite for MultiWordle:1:The remaining guesses of newly-initiated state is 6.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Start test test suite for MultiWordle:2:The current guess of newly-initiated state is the empty string.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Test test suite for MultiWordle:2:The current guess of newly-initiated state is the empty string is successful.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: End test test suite for MultiWordle:2:The current guess of newly-initiated state is the empty string.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Start test test suite for MultiWordle:4:Updating a game state reduces the number of guesses by 1.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Test test suite for MultiWordle:4:Updating a game state reduces the number of guesses by 1 is successful.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: End test test suite for MultiWordle:4:Updating a game state reduces the number of guesses by 1.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Start test test suite for MultiWordle:6:An ongoing game where there are remaining guesses left and where the word has not beet guessed is not over.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Test test suite for MultiWordle:6:An ongoing game where there are remaining guesses left and where the word has not beet guessed is not over is successful.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: End test test suite for MultiWordle:6:An ongoing game where there are remaining guesses left and where the word has not beet guessed is not over.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Start test test suite for MultiWordle:8:A game is over if there are no remaining guesses.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: Test test suite for MultiWordle:8:A game is over if there are no remaining guesses is successful.
+2022-03-26T17:16:21+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#02 I: End test test suite for MultiWordle:8:A game is over if there are no remaining guesses.
