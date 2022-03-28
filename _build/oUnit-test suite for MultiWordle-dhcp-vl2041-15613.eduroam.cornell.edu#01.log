@@ -1,0 +1,27 @@
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:0:Empty input.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:0:Empty input is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:0:Empty input.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:3:Proper feedback 2.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:3:Proper feedback 2 is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:3:Proper feedback 2.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:4:The word in newly-initiated state is of the proper length.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:4:The word in newly-initiated state is of the proper length is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:4:The word in newly-initiated state is of the proper length.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:7:Updating a game state does not change the designated word.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:7:Updating a game state does not change the designated word is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:7:Updating a game state does not change the designated word.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:8:Updating a game state reduces the number of guesses by 1.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:8:Updating a game state reduces the number of guesses by 1 is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:8:Updating a game state reduces the number of guesses by 1.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:11:A game is over if the designated word has been guessed.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:11:A game is over if the designated word has been guessed is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:11:A game is over if the designated word has been guessed.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:12:A game is over if there are no remaining guesses.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:12:A game is over if there are no remaining guesses is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:12:A game is over if there are no remaining guesses.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:15:Tests if all words generated in list are of length 5.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:15:Tests if all words generated in list are of length 5 is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:15:Tests if all words generated in list are of length 5.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Start test test suite for MultiWordle:17:Check if words are they same... they shouldn't be....
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: Test test suite for MultiWordle:17:Check if words are they same... they shouldn't be... is successful.
+2022-03-28T00:34:24+00:00 dhcp-vl2041-15613.eduroam.cornell.edu#01 I: End test test suite for MultiWordle:17:Check if words are they same... they shouldn't be....
