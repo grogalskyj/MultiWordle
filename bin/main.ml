@@ -1,4 +1,5 @@
 open Game
+open Data_processing
 open State
 open Scoring
 
@@ -32,11 +33,15 @@ let rec game_iter game_state =
     print_endline
       "You did not enter a string of valid length. Please try again.";
     game_iter game_state)
-  else print_colored_feedback (score_input guess game_state.word);
-  let new_game_state = update_game_state game_state guess in
-  if check_game_over new_game_state then
-    print_endline "Please play again!"
-  else game_iter new_game_state
+  else if is_word guess game_state.dictionary = false then (
+    print_endline "You did not enter a valid word. Please try again.";
+    game_iter game_state)
+  else (
+    print_colored_feedback (score_input guess game_state.word);
+    let new_game_state = update_game_state game_state guess in
+    if check_game_over new_game_state then
+      print_endline "Please play again!"
+    else game_iter new_game_state)
 
 let play_game () =
   let game_state = init_game_state 5 in

@@ -1,19 +1,23 @@
 let check_start_game (user_input : char) : bool =
   if user_input = 's' then true else false
 
-let rec query_dic
-    (dic : (string * Yojson.Basic.t) list)
-    (num_letters : int) =
+let rec make_dic (dic : (string * Yojson.Basic.t) list) : string list =
   match dic with
   | [] -> []
-  | (name, _) :: t ->
-      if String.length name = num_letters then
-        name :: query_dic t num_letters
-      else query_dic t num_letters
+  | (name, _) :: t -> name :: make_dic t
 
-let generate_word_bank (dic : Yojson.Basic.t) (num_letters : int) =
-  query_dic (Yojson.Basic.Util.to_assoc dic) num_letters
+let rec generate_word_bank (num_letters : int) (dic : string list) :
+    string list =
+  match dic with
+  | [] -> []
+  | h :: t ->
+      if String.length h = num_letters then
+        h :: generate_word_bank num_letters t
+      else generate_word_bank num_letters t
 
-let choose_random_word (dic_list : string list) : string =
+let choose_random_word (dic : string list) : string =
   let _ = Random.self_init () in
-  List.nth dic_list (Random.int (List.length dic_list))
+  List.nth dic (Random.int (List.length dic))
+
+let is_word (word : string) (dic : string list) : bool =
+  List.mem word dic

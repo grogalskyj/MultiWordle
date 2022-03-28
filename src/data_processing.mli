@@ -9,13 +9,22 @@
    choose_random_word (word_bank : string list) : string = generates a
    random word from the given word bank *)
 
-val choose_random_word : string list -> string
-(*randomly chooses one string from string list*)
-
-val generate_word_bank : Yojson.Basic.t -> int -> string list
-
-(*generates of string list of all words in dictionary of length n (where
-  n is 3<n<30) based on user input*)
-
 val check_start_game : char -> bool
-(*Checks if user has initialized Wordle game*)
+(** [check_start_game c] is true if the user has input the letter 's'
+    and thus wants to start playing. It is false for any other input. *)
+
+val make_dic : (string * Yojson.Basic.t) list -> string list
+(** [make_dic d] is a list of all string words inside the association
+    list represented by [d]. *)
+
+val generate_word_bank : int -> string list -> string list
+(** [generate_word_bank n d] is a string list of all strings inside [d]
+    that are of length [n]. *)
+
+val choose_random_word : string list -> string
+(** [choose_random_word d] is a random string inside of the string list
+    represented by [d]. *)
+
+val is_word : string -> string list -> bool
+(** [is_word w d] is true if [w] is a member of [d]. It is false
+    otherwise. *)

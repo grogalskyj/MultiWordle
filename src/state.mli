@@ -1,4 +1,5 @@
 type state = {
+  dictionary : string list;
   word : string;
   remaining_guesses : int;
   curr_guess : string;
