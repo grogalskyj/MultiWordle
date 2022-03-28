@@ -6,15 +6,6 @@ type state = {
   curr_guess : string;
 }
 
-type game_status =
-  | Instructions
-  | Playing
-  | GameOver
-
-let game_over : string =
-  let state = "The GAME is Over. " in
-  state
-
 let init_game_state (num_letters : int) : state =
   {
     word =
@@ -34,10 +25,13 @@ let update_game_state (game_state : state) (new_guess : string) : state
   }
 
 let check_game_over (game_state : state) : bool =
-  if game_state.curr_guess = game_state.word then
-    let _ = game_over in
-    true
-  else if game_state.remaining_guesses = 0 then true
+  if game_state.curr_guess = game_state.word then (
+    print_endline "Congrats you guessed the word!";
+    true)
+  else if game_state.remaining_guesses = 0 then (
+    print_endline
+      ("You ran out of guesses. The correct word was " ^ game_state.word);
+    true)
   else false
 
 let to_string (game_state : state) : string =

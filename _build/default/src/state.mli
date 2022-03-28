@@ -10,13 +10,6 @@ type state = {
     [curr_guess] is a string that stores the more recent guess made by
     the player. *)
 
-type game_status =
-  | Instructions
-  | Playing
-  | GameOver
-      (** The type game_status is a variant that stores the different
-          modes that the game may be in. *)
-
 val init_game_state : int -> state
 (** [init_game_state n] is a newly generated state with
     [remaining_guesses] set to 6, [word] set to a random string in the
@@ -30,13 +23,6 @@ val update_game_state : state -> string -> state
 val check_game_over : state -> bool
 (** [check_game_over st] is true if the player has guessed the word or
     has no remaining guesses. It is false otherwise. *)
-
-val game_over : string
-(** [game_over game_state] is a string informing the user if the game is
-    over, and whether they won or lost. The game is only over if the
-    user either guesses the word or runs out of lives.
-    [game_over game_state] should also tell the user what the correct
-    word was when the game is finished.*)
 
 val to_string : state -> string
 (** [to_string s] is a string representation of a state*)
