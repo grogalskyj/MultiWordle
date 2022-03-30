@@ -1,11 +1,6 @@
-More to come here - stay tuned!
+Welcome to MultiWordle. Below, we outline installation instructions. Please 
+follow them carefully.
 
-
-Welcome to MultiWordle! It's a joy to have you here. We're brushing up on some 
-of our features, so stayed tuned. In the meantime, you can find some starting 
-instructions below. Happy Wordling!
-
-
-
-i. Git Clone this repository into your local computer. 
-ii. 
+i. Unzip file
+ii. Run 'make build'
+iii. Run 'make play'
