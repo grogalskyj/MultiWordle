@@ -16,5 +16,5 @@ test:
 	OCAMLRUNPARAM=b dune exec test/main.exe
 
 zip:
-	rm -f adventure.zip
-	zip -r adventure.zip . -x@exclude.lst
+	rm -f MultiWordle.zip
+	zip -r MultiWordle.zip . -x@exclude.lst
