@@ -1,1 +1,1 @@
-src/scoring.ml: List String
+src/scoring.ml: ANSITerminal List String

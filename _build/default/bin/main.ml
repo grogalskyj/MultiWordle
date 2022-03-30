@@ -3,28 +3,6 @@ open Data_processing
 open State
 open Scoring
 
-(* Find way to represent _ as actual letter and not simply _*)
-(* Also restrict word entering to only five letters! *)
-(* The word was: *)
-let rec print_colored_feedback (str : string) =
-  if String.length str = 0 then print_endline ""
-  else if String.get str 0 = '_' then (
-    print_string "_";
-    print_colored_feedback (String.sub str 1 (String.length str - 1)))
-  else if String.get str 0 >= 'a' && String.get str 0 <= 'z' then (
-    ANSITerminal.print_string [ ANSITerminal.yellow ]
-      (String.uppercase_ascii (String.make 1 (String.get str 0)));
-    print_colored_feedback (String.sub str 1 (String.length str - 1)))
-  else if String.get str 0 >= 'A' && String.get str 0 <= 'Z' then (
-    ANSITerminal.print_string [ ANSITerminal.green ]
-      (String.make 1 (String.get str 0));
-    print_colored_feedback (String.sub str 1 (String.length str - 1)))
-  else
-    failwith
-      ("The character "
-      ^ String.make 1 (String.get str 0)
-      ^ " is not a valid feedback character.")
-
 let rec game_iter game_state =
   print_endline "Your guess: ";
   print_string "> ";

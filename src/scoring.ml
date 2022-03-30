@@ -38,6 +38,25 @@ let score_input (user_input : string) (correct_word : string) : string =
         (input |> lowercase_ascii |> string_to_string_list)
         (correct_word |> string_to_string_list)
 
+let rec print_colored_feedback (str : string) =
+  if String.length str = 0 then print_endline ""
+  else if String.get str 0 = '_' then (
+    print_string "_";
+    print_colored_feedback (String.sub str 1 (String.length str - 1)))
+  else if String.get str 0 >= 'a' && String.get str 0 <= 'z' then (
+    ANSITerminal.print_string [ ANSITerminal.yellow ]
+      (String.uppercase_ascii (String.make 1 (String.get str 0)));
+    print_colored_feedback (String.sub str 1 (String.length str - 1)))
+  else if String.get str 0 >= 'A' && String.get str 0 <= 'Z' then (
+    ANSITerminal.print_string [ ANSITerminal.green ]
+      (String.make 1 (String.get str 0));
+    print_colored_feedback (String.sub str 1 (String.length str - 1)))
+  else
+    failwith
+      ("The character "
+      ^ String.make 1 (String.get str 0)
+      ^ " is not a valid feedback character.")
+
 (* let feedback_helper user_input correct_word lives feedback= function
    | "OUT OF LIVES" -> "You guessed "^user_input^". The correct word was
    "^correct_word^". You are out of lives. GAME OVER." | "YOU WIN" ->

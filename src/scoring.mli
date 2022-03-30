@@ -12,13 +12,8 @@ val score_input : string -> string -> string
     score_input "lover" "ocean" will output "o _ e _ _", score input_
     "lover" "cover" will output "_ O V E R" *)
 
-(* val give_feedback : State.state -> string -> string -> string -> int
-   -> string -> string -> string *)
-(** [give_feedback game_state] generates a string informing the user how
-    their guess was scored against the correct word. The output string
-    will be "You guessed" + word guessed + ", our output is the
-    following: " + scored output
-
-    + ". You have " + guesses remaining + " guesses remaining."*)
-
-(*val give_feedback : State.state -> string*)
+val print_colored_feedback : string -> unit
+(** [print_colored_feedback s] prints a color-coded representation of
+    [s]. An individual char in s is printed as green if it is uppercase,
+    as yellow if it is lowercase, and as an underscore if it is an
+    underscore. *)
