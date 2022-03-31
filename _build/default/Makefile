@@ -14,3 +14,7 @@ clean:
 
 test:
 	OCAMLRUNPARAM=b dune exec test/main.exe
+
+zip:
+	rm -f multiwordle.zip
+	zip -r multiwordle.zip . -x@exclude.lst
