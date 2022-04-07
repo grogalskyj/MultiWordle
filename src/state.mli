@@ -3,6 +3,7 @@ type state = {
   word : string;
   remaining_guesses : int;
   curr_guess : string;
+  char_bank : char list;
 }
 (** The type state is a record that stores all the information for the
     current game being played. [word] is a string that stores the word

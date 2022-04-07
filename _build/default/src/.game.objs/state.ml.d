@@ -1,1 +1,1 @@
-src/state.ml: Data_processing Yojson
+src/state.ml: Data_processing List String Yojson

@@ -17,3 +17,5 @@ val print_colored_feedback : string -> unit
     [s]. An individual char in s is printed as green if it is uppercase,
     as yellow if it is lowercase, and as an underscore if it is an
     underscore. *)
+
+val print_word_bank : char list -> char list -> string -> unit

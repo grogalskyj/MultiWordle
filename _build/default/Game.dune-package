@@ -1,44 +1,5 @@
-(lang dune 3.0)
+(lang dune 2.9)
 (name Game)
-(sections (lib .) (libexec .) (doc ../../doc/Game))
-(files
- (lib
-  (META
-   author.ml
-   author.mli
-   data_processing.ml
-   data_processing.mli
-   dune-package
-   game.a
-   game.cma
-   game.cmi
-   game.cmt
-   game.cmx
-   game.cmxa
-   game.ml
-   game__Author.cmi
-   game__Author.cmt
-   game__Author.cmti
-   game__Author.cmx
-   game__Data_processing.cmi
-   game__Data_processing.cmt
-   game__Data_processing.cmti
-   game__Data_processing.cmx
-   game__Scoring.cmi
-   game__Scoring.cmt
-   game__Scoring.cmti
-   game__Scoring.cmx
-   game__State.cmi
-   game__State.cmt
-   game__State.cmti
-   game__State.cmx
-   opam
-   scoring.ml
-   scoring.mli
-   state.ml
-   state.mli))
- (libexec (game.cmxs))
- (doc (README.md)))
 (library
  (name Game)
  (kind normal)

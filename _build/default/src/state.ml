@@ -8,6 +8,7 @@ type state = {
   word : string;
   remaining_guesses : int;
   curr_guess : string;
+  char_bank : char list;
 }
 
 let init_game_state (num_letters : int) : state =
@@ -21,7 +22,14 @@ let init_game_state (num_letters : int) : state =
       |> choose_random_word;
     remaining_guesses = 6;
     curr_guess = "";
+    char_bank = [];
   }
+(*['a';'b';'c';'d';'e';'f';'g';'h';'i';'j';'k';'l';'m';'n';'o';'p';'q';'r';'s';'t';'u';'v';'w';'x';'y';'z']*)
+
+let update_char_bank (char_bank : char list) (guess : string) :
+    char list =
+  let char_list = List.init (String.length guess) (String.get guess) in
+  List.append char_list char_bank |> List.sort_uniq compare
 
 let update_game_state (game_state : state) (new_guess : string) : state
     =
@@ -30,6 +38,8 @@ let update_game_state (game_state : state) (new_guess : string) : state
     word = game_state.word;
     remaining_guesses = game_state.remaining_guesses - 1;
     curr_guess = new_guess;
+    char_bank =
+      update_char_bank game_state.char_bank (new_guess : string);
   }
 
 let check_game_over (game_state : state) : bool =
