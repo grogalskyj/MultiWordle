@@ -1,10 +1,10 @@
 # dune exec bin/main.exe
 # OCAMLPARAM: unset
 # Workspace root: /home/grogalskyj/3110/multiwordle/MultiWordle
-$ /usr/bin/nproc > /tmp/dune9c0732.output 2> /dev/null
+$ /usr/bin/nproc > /tmp/dunea4b80a.output 2> /dev/null
 # Auto-detected concurrency: 8
 # disable binary cache
-$ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune73f2b3.output
+$ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune16babb.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
