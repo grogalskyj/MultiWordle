@@ -50,7 +50,7 @@ let rec game_iter game_state =
   print_endline "Your guess: ";
   print_string "> ";
   let guess = read_line () in
-  if String.length guess <> 5 then (
+  if String.length guess <> String.length game_state.word then (
     print_endline
       "You did not enter a string of valid length. Please try again.";
     game_iter game_state)
@@ -65,8 +65,18 @@ let rec game_iter game_state =
       print_endline "Please play again!"
     else game_iter new_game_state)
 
-let play_game () =
-  let game_state = init_game_state 5 in
+(* let rec check_acceptable (accept : int list) (input : string) = let
+   input_int = int_of_string input in match accept with | [] -> false |
+   h :: t -> if input_int = h then true else check_acceptable t input
+
+   let get_num_letters : int = let acceptable_input = [ 3; 4; 5; 6; 7;
+   8; 9; 10 ] in ANSITerminal.print_string [ ANSITerminal.yellow ] "What
+   size words would you like to play with? Please enter a \ number 3 -
+   10: "; let s = read_line () in if check_acceptable acceptable_input s
+   then int_of_string s else 5 *)
+
+let play_game (num : int) () =
+  let game_state = init_game_state num in
   game_iter game_state
 
 let main () =
@@ -74,17 +84,18 @@ let main () =
     "\n\nWelcome to the MultiWordle game.\n";
   print_endline
     "Instructions: Welcome to MultiWordle! Your objective is to guess \
-     a predetermined five-letter word with only 6 guesses. For every \
-     word that you guess, our system will output that exact word, but \
-     with each letter colorcoded. A yellow letter means the \
+     a predetermined word (length is your choice) with only 6 guesses. \
+     For every word that you guess, our system will output that exact \
+     word, but with each letter colorcoded. A yellow letter means the \
      predetermined word has that letter, but the letter is in the \
      wrong place. A green letter means that the predetermined word has \
      that letter, and the letter is in the right place. An underscore \
      means that that letter is not in the predetermined word. To play, \
-     press \'s\'.\n";
+     enter a number between 3 and 10 to determine the length of the \
+     word you will be guessing.\n";
   print_string "> ";
-  match read_line () with
-  | "s" -> play_game ()
-  | _ -> print_endline "You did not enter a valid command"
+  let s = read_line () in
+  try play_game (int_of_string s) ()
+  with _ -> print_endline "You did not enter a valid command"
 
 let () = main ()
