@@ -77,7 +77,7 @@ let game_iter_two game_state = game_iter_one game_state
    10: "; let s = read_line () in if check_acceptable acceptable_input s
    then int_of_string s else 5 *)
 
-let rec play_game (num : int) () =
+let rec play_game (num : int) =
   let game_state = init_game_state num in
   ANSITerminal.print_string [ ANSITerminal.red ]
     "1 player or 2 player game? Enter '1' for one player, and '2' for \
@@ -89,7 +89,7 @@ let rec play_game (num : int) () =
   | "2" -> game_iter_two game_state
   | _ ->
       print_endline "You did not enter a valid command";
-      play_game num ()
+      play_game num
 
 let main () =
   ANSITerminal.print_string [ ANSITerminal.red ]
@@ -107,7 +107,7 @@ let main () =
      word you will be guessing.\n";
   print_string "> ";
   let s = read_line () in
-  try play_game (int_of_string s) ()
+  try play_game (int_of_string s)
   with _ -> print_endline "You did not enter a valid command"
 
 let () = main ()
