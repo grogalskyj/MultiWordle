@@ -5,32 +5,32 @@ open Scoring
 
 let alphabet =
   [
-    'a';
-    'b';
-    'c';
-    'd';
+    'q';
+    'w';
     'e';
+    'r';
+    't';
+    'y';
+    'u';
+    'i';
+    'o';
+    'p';
+    'a';
+    's';
+    'd';
     'f';
     'g';
     'h';
-    'i';
     'j';
     'k';
     'l';
-    'm';
-    'n';
-    'o';
-    'p';
-    'q';
-    'r';
-    's';
-    't';
-    'u';
-    'v';
-    'w';
-    'x';
-    'y';
     'z';
+    'x';
+    'c';
+    'v';
+    'b';
+    'n';
+    'm';
   ]
 
 (* let rec game_iter game_state = print_endline "Your guess: ";

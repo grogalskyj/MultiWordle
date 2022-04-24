@@ -28,29 +28,20 @@ let rec score_helper
       ^ score_helper (count + 1) str_list correct_word_str_list
     else "_" ^ score_helper (count + 1) str_list correct_word_str_list
 
-let rec check_bank (c : char) (bank : char list) : bool =
-  match bank with
-  | [] -> false
-  | h :: t -> if h = c then true else check_bank c t
-(* let rec check_letter_guess (c : char) (guess : string) : bool = let
-   guess = guess in let char_list = List.init (String.length guess)
-   (String.get guess) in match char_list with | [] -> false | h :: _ ->
-   if h = c then true else check_letter_guess c guess *)
-
 let rec print_word_bank
     (bank : char list)
     (alphabet : char list)
     (guess : string) : unit =
   match alphabet with
   | [] -> print_endline ""
-  | h :: r ->
-      if check_bank h bank then (
+  | h :: t ->
+      if List.mem h bank then (
         ANSITerminal.print_string [ ANSITerminal.yellow ]
           (String.make 1 h);
-        print_word_bank bank r guess)
+        print_word_bank bank t guess)
       else (
         ANSITerminal.print_string [ ANSITerminal.red ] (String.make 1 h);
-        print_word_bank bank r guess)
+        print_word_bank bank t guess)
 
 let score_input (user_input : string) (correct_word : string) : string =
   match user_input with
