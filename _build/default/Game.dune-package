@@ -32,11 +32,17 @@
    game__State.cmt
    game__State.cmti
    game__State.cmx
+   game__Wager.cmi
+   game__Wager.cmt
+   game__Wager.cmti
+   game__Wager.cmx
    opam
    scoring.ml
    scoring.mli
    state.ml
-   state.mli))
+   state.mli
+   wager.ml
+   wager.mli))
  (libexec (game.cmxs))
  (doc (README.md)))
 (library
@@ -63,7 +69,8 @@
      (visibility public)
      (impl)
      (intf))
-    ((name State) (obj_name game__State) (visibility public) (impl) (intf)))
+    ((name State) (obj_name game__State) (visibility public) (impl) (intf))
+    ((name Wager) (obj_name game__Wager) (visibility public) (impl) (intf)))
    (alias_module
     (name Game)
     (obj_name game)

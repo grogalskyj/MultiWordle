@@ -2,6 +2,7 @@ open Game
 open Data_processing
 open State
 open Scoring
+open Wager
 
 let alphabet =
   [
@@ -67,6 +68,25 @@ let rec game_iter_one game_state =
 
 let game_iter_two game_state = game_iter_one game_state
 
+let game_start_wager game_state =
+  print_endline
+    "Instructions: Welcome to WagerWordle. Your object is to guess a \
+     predetermined word of length 3-10 before your opponent. You and \
+     your opponent will each be given a starting WordleCoin balance of \
+     100. Each /\n\
+    \  round you will be prompted to wager a some portion of your \
+     balance on the gamble that you will guess the word before your \
+     opponent. Wagers from you and your opponent will be pooled \
+     together each round, and the player that guesses the word first \
+     will redeem the pot. Additionally, you will be prompted to \
+     project how many guesses it will  \n\
+    \  take you to guess the word. If you win the round AND correctly \
+     predict  \n\
+    \  number of guesses you will need, you will receive an additional \
+     10% of pot value directly from your opponent's WordleCoin \
+     balance. The first player to reach 0 WordleCoins loses.";
+  get_wager game_state
+
 (* let rec check_acceptable (accept : int list) (input : string) = let
    input_int = int_of_string input in match accept with | [] -> false |
    h :: t -> if input_int = h then true else check_acceptable t input
@@ -80,13 +100,14 @@ let game_iter_two game_state = game_iter_one game_state
 let rec play_game (num : int) =
   let game_state = init_game_state num in
   ANSITerminal.print_string [ ANSITerminal.red ]
-    "1 player or 2 player game? Enter '1' for one player, and '2' for \
-     two player.\n";
+    "1 player or 2 player game, or WagerWordle? Enter '1' for one \
+     player, '2' for two player, or 'W' for WagerWordle.\n";
   print_string "> ";
   let input = read_line () in
   match input with
   | "1" -> game_iter_one game_state
   | "2" -> game_iter_two game_state
+  | "W" -> game_start_wager game_state
   | _ ->
       print_endline "You did not enter a valid command";
       play_game num

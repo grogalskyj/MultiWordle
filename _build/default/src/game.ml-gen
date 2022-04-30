@@ -12,3 +12,7 @@ module Scoring = Game__Scoring
 
 (** @canonical Game.State *)
 module State = Game__State
+
+
+(** @canonical Game.Wager *)
+module Wager = Game__Wager
