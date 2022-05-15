@@ -1,4 +1,5 @@
 open String
+open State
 
 let rec string_to_string_list str =
   match str with
@@ -28,20 +29,26 @@ let rec score_helper
       ^ score_helper (count + 1) str_list correct_word_str_list
     else "_" ^ score_helper (count + 1) str_list correct_word_str_list
 
-let rec print_word_bank
-    (bank : char list)
-    (alphabet : char list)
-    (guess : string) : unit =
+let print_indent (most_recent_letter : char) =
+  if most_recent_letter = 'p' then print_string "\n "
+  else if most_recent_letter = 'l' then print_string "\n  "
+  else print_string " "
+
+let rec print_word_bank (game_state : state) (alphabet : char list) :
+    unit =
   match alphabet with
   | [] -> print_endline ""
   | h :: t ->
-      if List.mem h bank then (
+      if List.mem h game_state.char_bank then (
         ANSITerminal.print_string [ ANSITerminal.yellow ]
-          (String.make 1 h);
-        print_word_bank bank t guess)
+          (String.make 1 h |> String.uppercase_ascii);
+        print_indent h;
+        print_word_bank game_state t)
       else (
-        ANSITerminal.print_string [ ANSITerminal.red ] (String.make 1 h);
-        print_word_bank bank t guess)
+        ANSITerminal.print_string [ ANSITerminal.red ]
+          (String.make 1 h |> String.uppercase_ascii);
+        print_indent h;
+        print_word_bank game_state t)
 
 let score_input (user_input : string) (correct_word : string) : string =
   match user_input with

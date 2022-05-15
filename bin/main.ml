@@ -61,7 +61,7 @@ let rec game_iter_one game_state =
   else (
     print_colored_feedback (score_input guess game_state.word);
     let new_game_state = update_game_state game_state guess in
-    print_word_bank new_game_state.char_bank alphabet guess;
+    print_word_bank new_game_state alphabet;
     if check_game_over new_game_state then
       print_endline "Please play again!\n\n"
     else game_iter_one new_game_state)

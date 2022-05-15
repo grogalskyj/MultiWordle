@@ -1,3 +1,5 @@
+open State
+
 val score_input : string -> string -> string
 (** [score_input user_input correct_word] generates an output string
     that indicates the correctness of the input string. The output
@@ -14,8 +16,11 @@ val score_input : string -> string -> string
 
 val print_colored_feedback : string -> unit
 (** [print_colored_feedback s] prints a color-coded representation of
-    [s]. An individual char in s is printed as green if it is uppercase,
-    as yellow if it is lowercase, and as an underscore if it is an
-    underscore. *)
+    [s]. An individual char in [s] is printed as green if it is
+    uppercase, as yellow if it is lowercase, and as an underscore if it
+    is an underscore. *)
 
-val print_word_bank : char list -> char list -> string -> unit
+val print_word_bank : state -> char list -> unit
+(** [print_word_bank s a] prints a color-coded representation of the
+    alphabet given by [b]. An individual letter in [b] is printed as
+    yellow if it has already been guessed. It is printed red otherwise. *)

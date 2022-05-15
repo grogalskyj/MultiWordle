@@ -1,3 +1,5 @@
+open State
+
 val score_input : string -> string -> string
 (** [score_input user_input correct_word] generates an output string
     that indicates the correctness of the input string. The output
@@ -18,4 +20,4 @@ val print_colored_feedback : string -> unit
     as yellow if it is lowercase, and as an underscore if it is an
     underscore. *)
 
-val print_word_bank : char list -> char list -> string -> unit
+val print_word_bank : state -> char list -> unit
