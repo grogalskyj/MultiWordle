@@ -1,1 +1,1 @@
-src/wager.mli: State
+src/wager.mli:
