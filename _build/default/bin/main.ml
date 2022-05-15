@@ -48,7 +48,7 @@ let alphabet =
    again!" else game_iter new_game_state) *)
 
 let rec game_iter_one game_state =
-  print_endline "Your guess: ";
+  print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
   if String.length guess <> String.length game_state.word then (
@@ -94,25 +94,25 @@ let game_iter_two game_state = game_iter_one game_state
 
 let rec play_game (num : int) =
   let game_state = init_game_state num in
-  ANSITerminal.print_string [ ANSITerminal.red ]
-    "1 player or 2 player game, or WagerWordle? Enter '1' for one \
-     player, '2' for two player, or 'W' for WagerWordle.\n";
+  ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
+  print_endline
+    "Select one of the game modes below to get started\n\
+     One Player | Two Player | WagerWordle";
   print_string "> ";
   let input = read_line () in
   match input with
-  | "1" -> game_iter_one game_state
-  | "2" -> game_iter_two game_state
-  (* | "W" -> game_start_wager game_state *)
+  | "One Player" -> game_iter_one game_state
+  | "Two Player" -> game_iter_two game_state
+  (* | "WagerWordle" -> game_start_wager game_state *)
   | _ ->
       print_endline "You did not enter a valid command";
       play_game num
 
 let main () =
-  ANSITerminal.print_string [ ANSITerminal.red ]
-    "\n\nWelcome to the MultiWordle game.\n";
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
-    "Instructions: Welcome to MultiWordle! Your objective is to guess \
-     a predetermined word (length is your choice) with only 6 guesses. \
+    "Welcome to MultiWordle! Your objective is to guess a \
+     predetermined word (length is your choice) with only 6 guesses. \
      For every word that you guess, our system will output that exact \
      word, but with each letter colorcoded. A yellow letter means the \
      predetermined word has that letter, but the letter is in the \
