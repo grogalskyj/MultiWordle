@@ -1,1 +1,1 @@
-src/storage.mli:
+src/storage.mli: Player

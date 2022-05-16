@@ -1,10 +1,9 @@
 # dune build
 # OCAMLPARAM: unset
-# Workspace root: /home/grogalskyj/3110/multiwordle/MultiWordle
-$ /usr/bin/nproc > /tmp/dunea67087.output 2> /dev/null
-# Auto-detected concurrency: 8
-# disable binary cache
-$ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune4c9657.output
+# Shared cache: disabled
+# Workspace root: /Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle
+# Auto-detected concurrency: 10
+$ /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/5s/mnjmbrw925l0j4xm4j4q5t880000gn/T/dune_752001_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -14,77 +13,76 @@ $ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune4c9657.
 #  ; fdo_target_exe = None
 #  ; build_dir = "default"
 #  ; toplevel_path =
-#      Some External "/home/grogalskyj/.opam/cs3110-2021fa/lib/toplevel"
-#  ; ocaml_bin = External "/home/grogalskyj/.opam/cs3110-2021fa/bin"
-#  ; ocaml = Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocaml"
-#  ; ocamlc = External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt"
+#      Some External "/Users/jasonkatz/.opam/cs3110-2021fa/lib/toplevel"
+#  ; ocaml_bin = External "/Users/jasonkatz/.opam/cs3110-2021fa/bin"
+#  ; ocaml = Ok External "/Users/jasonkatz/.opam/cs3110-2021fa/bin/ocaml"
+#  ; ocamlc = External "/Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt"
+#      Ok External "/Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamldep.opt"
+#      Ok External "/Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
+#      Ok External "/Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/home/grogalskyj/.opam/cs3110-2021fa/lib"
+#        { "DUNE_OCAML_HARDCODED" : "/Users/jasonkatz/.opam/cs3110-2021fa/lib"
 #        ; "DUNE_OCAML_STDLIB" :
-#            "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" : "/home/grogalskyj/3110/multiwordle/MultiWordle"
+#            "/Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" :
+#            "/Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle"
 #        ; "INSIDE_DUNE" :
-#            "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/default"
+#            "/Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/install/default/lib"
+#            "/Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/install/default/lib"
+#            "/Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/install/default/lib/toplevel"
+#            "/Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_path = [ External "/home/grogalskyj/.opam/cs3110-2021fa/lib" ]
+#  ; findlib_path = [ External "/Users/jasonkatz/.opam/cs3110-2021fa/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "4.12.0"
 #      ; standard_library_default =
-#          "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
-#      ; standard_library = "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
+#          "/Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml"
+#      ; standard_library = "/Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
-#      ; c_compiler = "gcc"
-#      ; ocamlc_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fPIC" ]
+#      ; c_compiler = "cc"
+#      ; ocamlc_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv" ]
 #      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
-#      ; ocamlopt_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fPIC" ]
+#      ; ocamlopt_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv" ]
 #      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
 #      ; bytecomp_c_compiler =
-#          [ "gcc"
+#          [ "cc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
-#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ; "-D_REENTRANT"
 #          ]
-#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
 #      ; native_c_compiler =
-#          [ "gcc"
+#          [ "cc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
-#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ; "-D_REENTRANT"
 #          ]
-#      ; native_c_libraries = [ "-lm"; "-ldl" ]
+#      ; native_c_libraries = [ "-lm" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
 #      ; cc_profile = []
-#      ; architecture = "amd64"
+#      ; architecture = "arm64"
 #      ; model = "default"
 #      ; int_size = 63
 #      ; word_size = 64
-#      ; system = "linux"
-#      ; asm = [ "as" ]
+#      ; system = "macosx"
+#      ; asm = [ "clang"; "-c"; "-Wno-trigraphs" ]
 #      ; asm_cfi_supported = true
 #      ; with_frame_pointers = false
 #      ; ext_exe = ""
@@ -95,8 +93,8 @@ $ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune4c9657.
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "x86_64-pc-linux-gnu"
-#      ; target = "x86_64-pc-linux-gnu"
+#      ; host = "aarch64-apple-darwin21.1.0"
+#      ; target = "aarch64-apple-darwin21.1.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -135,3 +133,7 @@ $ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @
 [2]
 $ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__State.cmo -c -impl src/state.ml)
 $ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__State.cmx -c -impl src/state.ml)
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamldep.opt -modules -impl src/storage.ml) > _build/default/src/.game.objs/storage.ml.d
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__Storage.cmx -c -impl src/storage.ml)
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/game.cmxa src/.game.objs/native/game.cmx src/.game.objs/native/game__Wager.cmx src/.game.objs/native/game__Player.cmx src/.game.objs/native/game__Storage.cmx src/.game.objs/native/game__Data_processing.cmx src/.game.objs/native/game__State.cmx src/.game.objs/native/game__Scoring.cmx src/.game.objs/native/game__Gui.cmx src/.game.objs/native/game__Author.cmx)
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o bin/main.exe /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format/easy_format.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou/biniou.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson/yojson.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml/unix.cmxa -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal/ANSITerminal.cmxa -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal src/game.cmxa bin/.main.eobjs/native/dune__exe__Main.cmx)
