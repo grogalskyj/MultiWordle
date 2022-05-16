@@ -8,12 +8,12 @@ let rec get_usernames (database : player_database) : string list =
   | [ (h, _) ] -> [ h ]
   | (h, _) :: t -> h :: get_usernames t
 
-(*let get_game_history (player_record : player) : (int * int) list =
-  player_record.game_history *)
+(* let get_game_history (player_record : player) : (int * int) list =
+   player_record.game_history *)
 
-(*let rec get_guesses (history : (int * int) list) : int list = match
-  history with | [] -> [] | [ (_, guess) ] -> [ guess ] | (_, guess) ::
-  t -> guess :: get_guesses t *)
+(* let rec get_guesses (history : (int * int) list) : int list = match
+   history with | [] -> [] | [ (_, guess) ] -> [ guess ] | (_, guess) ::
+   t -> guess :: get_guesses t *)
 
 let get_player_record (username : string) (database : player_database) :
     player =
