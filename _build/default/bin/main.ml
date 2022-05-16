@@ -152,7 +152,7 @@ let rec play_game (num_letters : int) =
       print_endline "You did not enter a valid command";
       play_game num_letters
 
-let main () =
+let play_wordle () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
     "Welcome to MultiWordle! Your objective is to guess a \
@@ -169,5 +169,21 @@ let main () =
   let s = read_line () in
   try play_game (int_of_string s)
   with _ -> print_endline "You did not enter a valid command"
+
+let word_search () =
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
+  print_endline "Word search here!"
+
+let main () =
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "\n\
+    \ Welcome to Our Word Arcade. Please Choose from the following \
+     Games: | MultiWordle | Word Search |";
+  print_string "> ";
+  let s = read_line () in
+  match s with
+  | "MultiWordle" -> play_wordle ()
+  | "Word Search" -> word_search ()
+  | _ -> print_endline "You did not enter a valid command"
 
 let () = main ()
