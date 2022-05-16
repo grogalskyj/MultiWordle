@@ -95,6 +95,7 @@ let game_iter_two game_state = game_iter_one game_state
 let rec play_game (num : int) =
   let game_state = init_game_state num in
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
+  Gui.open_display;
   print_endline
     "Select one of the game modes below to get started\n\
      One Player | Two Player | WagerWordle";
