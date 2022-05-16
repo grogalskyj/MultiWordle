@@ -1,7 +1,7 @@
 type player = {
   username : string;
   password : string;
-  score_history : (int * int) list;
+  game_history : (int * int) list;
 }
 
 val make_player : string -> string -> player
@@ -9,7 +9,7 @@ val make_player : string -> string -> player
     using [username] as the account username, and [password] as the
     account password*)
 
-val update_player : int -> int -> player -> player
+val update_player : int -> int -> player -> (int * int) list
 (** [update_player last_game_length last_game_guesses user] updates the
     score_history field of type player to account for the most recent
     game that was played. [last_game_length] is an int that represents

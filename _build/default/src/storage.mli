@@ -1,6 +1,8 @@
-(* type player = { username : string; password : string; score_history :
-   (int * int) list; } *)
-(* val games_played : string -> (int * int) list -> int (**
+(* open Player
+
+   type player_database = string list
+
+   val games_played : string -> (int * int) list -> int (**
    [games_played username score_history] calculates the total number of
    games that a specific user has played.*)
 
