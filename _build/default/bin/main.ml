@@ -34,20 +34,7 @@ let alphabet =
     'm';
   ]
 
-(* let rec game_iter game_state = print_endline "Your guess: ";
-   print_string "> "; let guess = read_line () in if String.length guess
-   <> 5 then ( print_endline "You did not enter a string of valid\n\ \
-   length. Please try again."; game_iter game_state) else if is_word
-   guess game_state.dictionary = false then ( print_endline "You did
-   not\n enter a valid word. Please try again."; game_iter game_state)
-   else ( print_colored_feedback (score_input guess game_state.word); (*
-   ANSITerminal.print_string [ ANSITerminal.green ] "here"; *) let
-   new_game_state = update_game_state game_state guess in
-   print_word_bank new_game_state.char_bank alphabet guess; if
-   check_game_over new_game_state then print_endline "Please play\n
-   again!" else game_iter new_game_state) *)
-
-let rec game_iter_one game_state =
+let rec game_iter_one game_state : state =
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
@@ -62,51 +49,108 @@ let rec game_iter_one game_state =
     print_colored_feedback (score_input guess game_state.word);
     let new_game_state = update_game_state game_state guess in
     print_word_bank new_game_state alphabet;
-    if check_game_over new_game_state then
-      print_endline "Please play again!\n\n"
-    else game_iter_one new_game_state)
+    if check_game_over new_game_state = false then
+      game_iter_one new_game_state
+    else new_game_state)
 
-let game_iter_two game_state = game_iter_one game_state
-(* let game_start_wager game_state = print_endline "Instructions:
-   Welcome to WagerWordle. Your object is to guess a \ predetermined
-   word of length 3-10 before your opponent. You and \ your opponent
-   will each be given a starting WordleCoin balance of \ 100. Each /\n\
-   \ round you will be prompted to wager a some portion of your \
-   balance on the gamble that you will guess the word before your \
-   opponent. Wagers from you and your opponent will be pooled \ together
-   each round, and the player that guesses the word first \ will redeem
-   the pot. Additionally, you will be prompted to \ project how many
-   guesses it will \n\ \ take you to guess the word. If you win the
-   round AND correctly \ predict \n\ \ number of guesses you will need,
-   you will receive an additional \ 10% of pot value directly from your
-   opponent's WordleCoin \ balance. The first player to reach 0
-   WordleCoins loses."; get_wager game_state *)
+let rec game_iter_two_state_update (game_state : state) : unit =
+  print_string "> ";
+  let input_word = read_line () in
+  if String.length input_word <> String.length game_state.word then (
+    print_endline
+      "You did not enter a string of valid length. Please try again.";
+    game_iter_two_state_update game_state)
+  else if is_word input_word game_state.dictionary = false then (
+    print_endline "You did not enter a valid word. Please try again.";
+    game_iter_two_state_update game_state)
+  else game_state.word <- input_word
 
-(* let rec check_acceptable (accept : int list) (input : string) = let
-   input_int = int_of_string input in match accept with | [] -> false |
-   h :: t -> if input_int = h then true else check_acceptable t input
+let rec game_iter_two
+    (player_one_game_state : state)
+    (player_two_game_state : state)
+    (player_one_points : int)
+    (player_two_points : int)
+    (round_number : int) =
+  if round_number = 6 then
+    if player_one_points > player_two_points then
+      ANSITerminal.print_string [ ANSITerminal.blue ]
+        "\nPlayer 1 won!\n"
+    else if player_one_points < player_two_points then
+      ANSITerminal.print_string [ ANSITerminal.blue ]
+        "\nPlayer 2 won!\n"
+    else
+      ANSITerminal.print_string [ ANSITerminal.blue ]
+        "\nThe game ended in a tie\n"
+  else (
+    ANSITerminal.print_string [ ANSITerminal.red ]
+      ("ROUND " ^ string_of_int round_number);
+    print_endline "\nCurrent score:";
+    print_endline
+      ("PLAYER ONE: "
+      ^ string_of_int player_one_points
+      ^ " | PLAYER TWO: "
+      ^ string_of_int player_two_points);
+    print_endline
+      "\nPLAYER ONE, please enter a word for PLAYER TWO to guess";
+    game_iter_two_state_update player_two_game_state;
+    print_endline "\nPLAYER TWO, your turn to guess";
+    let player_one_round_points =
+      (game_iter_one player_two_game_state).remaining_guesses
+    in
 
-   let get_num_letters : int = let acceptable_input = [ 3; 4; 5; 6; 7;
-   8; 9; 10 ] in ANSITerminal.print_string [ ANSITerminal.yellow ] "What
-   size words would you like to play with? Please enter a \ number 3 -
-   10: "; let s = read_line () in if check_acceptable acceptable_input s
-   then int_of_string s else 5 *)
+    print_endline
+      "\nPLAYER TWO, please enter a word for PLAYER ONE to guess";
+    game_iter_two_state_update player_one_game_state;
+    print_endline "PLAYER ONE, your turn to guess";
+    let player_two_round_points =
+      (game_iter_one player_one_game_state).remaining_guesses
+    in
 
-let rec play_game (num : int) =
-  let game_state = init_game_state num in
+    game_iter_two
+      (init_game_state (String.length player_one_game_state.word))
+      (init_game_state (String.length player_one_game_state.word))
+      (player_one_points + player_one_round_points)
+      (player_two_points + player_two_round_points)
+      (round_number + 1))
+
+let rec play_game (num_letters : int) =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
      One Player | Two Player | WagerWordle";
   print_string "> ";
   let input = read_line () in
-  match input with
-  | "One Player" -> game_iter_one game_state
-  | "Two Player" -> game_iter_two game_state
+  match String.lowercase_ascii input with
+  | "one player" ->
+      ANSITerminal.print_string [ ANSITerminal.red ]
+        "\nONE PLAYER INSTRUCTIONS\n";
+      print_endline
+        "Welcome to one player mode! This mode simulates a classic \
+         Wordle game where you have six attempts to guess a \
+         predetermined word.";
+      ignore (game_iter_one (init_game_state num_letters))
+  | "two player" ->
+      ANSITerminal.print_string [ ANSITerminal.red ]
+        "\nTWO PLAYER INSTRUCTIONS\n";
+      print_endline
+        "Welcome to two player mode! Please first decide the player \
+         that will be Player One and the player that will be Player \
+         Two. This mode consists of five rounds, after which the \
+         player with the most points will win. In each round, Player \
+         One will choose a word that Player Two must guess, and then \
+         Player Two will choose a word that Player One must guess. \
+         Each player will have 6 guesses to guess their assigned word, \
+         and if they guess the word in x tries, then they will earn (6 \
+         - x) points for that round.\n";
+
+      game_iter_two
+        (init_game_state num_letters)
+        (init_game_state num_letters)
+        0 0 1
   (* | "WagerWordle" -> game_start_wager game_state *)
   | _ ->
       print_endline "You did not enter a valid command";
-      play_game num
+      play_game num_letters
 
 let main () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
