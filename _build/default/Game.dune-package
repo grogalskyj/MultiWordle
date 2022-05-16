@@ -28,6 +28,10 @@
    game__Gui.cmt
    game__Gui.cmti
    game__Gui.cmx
+   game__Player.cmi
+   game__Player.cmt
+   game__Player.cmti
+   game__Player.cmx
    game__Scoring.cmi
    game__Scoring.cmt
    game__Scoring.cmti
@@ -36,6 +40,10 @@
    game__State.cmt
    game__State.cmti
    game__State.cmx
+   game__Storage.cmi
+   game__Storage.cmt
+   game__Storage.cmti
+   game__Storage.cmx
    game__Wager.cmi
    game__Wager.cmt
    game__Wager.cmti
@@ -43,10 +51,14 @@
    gui.ml
    gui.mli
    opam
+   player.ml
+   player.mli
    scoring.ml
    scoring.mli
    state.ml
    state.mli
+   storage.ml
+   storage.mli
    wager.ml
    wager.mli))
  (libexec (game.cmxs))
@@ -71,12 +83,18 @@
      (impl)
      (intf))
     ((name Gui) (obj_name game__Gui) (visibility public) (impl) (intf))
+    ((name Player) (obj_name game__Player) (visibility public) (impl) (intf))
     ((name Scoring)
      (obj_name game__Scoring)
      (visibility public)
      (impl)
      (intf))
     ((name State) (obj_name game__State) (visibility public) (impl) (intf))
+    ((name Storage)
+     (obj_name game__Storage)
+     (visibility public)
+     (impl)
+     (intf))
     ((name Wager) (obj_name game__Wager) (visibility public) (impl) (intf)))
    (alias_module
     (name Game)
