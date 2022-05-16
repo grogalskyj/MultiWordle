@@ -10,12 +10,20 @@ module Data_processing = Game__Data_processing
 module Gui = Game__Gui
 
 
+(** @canonical Game.Player *)
+module Player = Game__Player
+
+
 (** @canonical Game.Scoring *)
 module Scoring = Game__Scoring
 
 
 (** @canonical Game.State *)
 module State = Game__State
+
+
+(** @canonical Game.Storage *)
+module Storage = Game__Storage
 
 
 (** @canonical Game.Wager *)
