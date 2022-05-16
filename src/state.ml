@@ -5,7 +5,7 @@ let dictionary_json = "dictionary.json"
 
 type state = {
   dictionary : string list;
-  word : string;
+  mutable word : string;
   remaining_guesses : int;
   curr_guess : string;
   char_bank : char list;
@@ -44,7 +44,7 @@ let update_game_state (game_state : state) (new_guess : string) : state
 
 let check_game_over (game_state : state) : bool =
   if game_state.curr_guess = game_state.word then (
-    print_endline "Congrats you guessed the word!";
+    print_endline "Congrats you guessed the word!\n";
     true)
   else if game_state.remaining_guesses = 0 then (
     print_endline

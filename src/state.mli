@@ -1,6 +1,6 @@
 type state = {
   dictionary : string list;
-  word : string;
+  mutable word : string;
   remaining_guesses : int;
   curr_guess : string;
   char_bank : char list;
