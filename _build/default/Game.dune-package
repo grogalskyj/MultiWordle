@@ -24,6 +24,10 @@
    game__Data_processing.cmt
    game__Data_processing.cmti
    game__Data_processing.cmx
+   game__Gui.cmi
+   game__Gui.cmt
+   game__Gui.cmti
+   game__Gui.cmx
    game__Scoring.cmi
    game__Scoring.cmt
    game__Scoring.cmti
@@ -36,6 +40,8 @@
    game__Wager.cmt
    game__Wager.cmti
    game__Wager.cmx
+   gui.ml
+   gui.mli
    opam
    scoring.ml
    scoring.mli
@@ -51,7 +57,7 @@
  (archives (byte game.cma) (native game.cmxa))
  (plugins (byte game.cma) (native game.cmxs))
  (native_archives game.a)
- (requires yojson ANSITerminal)
+ (requires yojson ANSITerminal graphics)
  (main_module_name Game)
  (modes byte native)
  (modules
@@ -64,6 +70,7 @@
      (visibility public)
      (impl)
      (intf))
+    ((name Gui) (obj_name game__Gui) (visibility public) (impl) (intf))
     ((name Scoring)
      (obj_name game__Scoring)
      (visibility public)

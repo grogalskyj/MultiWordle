@@ -6,6 +6,10 @@ module Author = Game__Author
 module Data_processing = Game__Data_processing
 
 
+(** @canonical Game.Gui *)
+module Gui = Game__Gui
+
+
 (** @canonical Game.Scoring *)
 module Scoring = Game__Scoring
 
