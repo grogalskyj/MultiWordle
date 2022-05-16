@@ -1,29 +1,34 @@
-# dune exec bin/main.exe
+# dune build
 # OCAMLPARAM: unset
-# Shared cache: disabled
 # Workspace root: /home/grogalskyj/3110/multiwordle/MultiWordle
+$ /usr/bin/nproc > /tmp/dunea67087.output 2> /dev/null
 # Auto-detected concurrency: 8
-$ /home/grogalskyj/.opam/4.12.1/bin/ocamlc.opt -config > /tmp/dune_c0c6ad_output
+# disable binary cache
+$ /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /tmp/dune4c9657.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
-#  ; profile = Dev
+#  ; profile = Dyn
 #  ; merlin = true
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = "default"
-#  ; toplevel_path = Some External "/home/grogalskyj/.opam/4.12.1/lib/toplevel"
-#  ; ocaml_bin = External "/home/grogalskyj/.opam/4.12.1/bin"
-#  ; ocaml = Ok External "/home/grogalskyj/.opam/4.12.1/bin/ocaml"
-#  ; ocamlc = External "/home/grogalskyj/.opam/4.12.1/bin/ocamlc.opt"
-#  ; ocamlopt = Ok External "/home/grogalskyj/.opam/4.12.1/bin/ocamlopt.opt"
-#  ; ocamldep = Ok External "/home/grogalskyj/.opam/4.12.1/bin/ocamldep.opt"
+#  ; toplevel_path =
+#      Some External "/home/grogalskyj/.opam/cs3110-2021fa/lib/toplevel"
+#  ; ocaml_bin = External "/home/grogalskyj/.opam/cs3110-2021fa/bin"
+#  ; ocaml = Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocaml"
+#  ; ocamlc = External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt"
+#  ; ocamlopt =
+#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt"
+#  ; ocamldep =
+#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/home/grogalskyj/.opam/4.12.1/bin/ocamlmklib.opt"
+#      Ok External "/home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/home/grogalskyj/.opam/4.12.1/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/home/grogalskyj/.opam/4.12.1/lib/ocaml"
+#        { "DUNE_OCAML_HARDCODED" : "/home/grogalskyj/.opam/cs3110-2021fa/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
 #        ; "DUNE_SOURCEROOT" : "/home/grogalskyj/3110/multiwordle/MultiWordle"
 #        ; "INSIDE_DUNE" :
 #            "/home/grogalskyj/3110/multiwordle/MultiWordle/_build/default"
@@ -36,132 +41,50 @@ $ /home/grogalskyj/.opam/4.12.1/bin/ocamlc.opt -config > /tmp/dune_c0c6ad_output
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_path = [ External "/home/grogalskyj/.opam/4.12.1/lib" ]
+#  ; findlib_path = [ External "/home/grogalskyj/.opam/cs3110-2021fa/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
-#      { version = "4.12.1"
-#      ; standard_library_default = "/home/grogalskyj/.opam/4.12.1/lib/ocaml"
-#      ; standard_library = "/home/grogalskyj/.opam/4.12.1/lib/ocaml"
+#      { version = "4.12.0"
+#      ; standard_library_default =
+#          "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
+#      ; standard_library = "/home/grogalskyj/.opam/cs3110-2021fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
-#      ; c_compiler =
-#          "/home/grogalskyj/anaconda3/envs/py37stan2/bin/x86_64-conda-linux-gnu-cc"
-#      ; ocamlc_cflags =
-#          [ "-O2"
-#          ; "-fno-strict-aliasing"
-#          ; "-fwrapv"
-#          ; "-fPIC"
-#          ; "-march=nocona"
-#          ; "-mtune=haswell"
-#          ; "-ftree-vectorize"
-#          ; "-fPIC"
-#          ; "-fstack-protector-strong"
-#          ; "-fno-plt"
-#          ; "-O2"
-#          ; "-ffunction-sections"
-#          ; "-pipe"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
-#          ]
-#      ; ocamlc_cppflags =
-#          [ "-D_FILE_OFFSET_BITS=64"
-#          ; "-D_REENTRANT"
-#          ; "-DNDEBUG"
-#          ; "-D_FORTIFY_SOURCE=2"
-#          ; "-O2"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
-#          ]
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fPIC" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
 #      ; ocamlopt_cflags =
-#          [ "-O2"
-#          ; "-fno-strict-aliasing"
-#          ; "-fwrapv"
-#          ; "-fPIC"
-#          ; "-march=nocona"
-#          ; "-mtune=haswell"
-#          ; "-ftree-vectorize"
-#          ; "-fPIC"
-#          ; "-fstack-protector-strong"
-#          ; "-fno-plt"
-#          ; "-O2"
-#          ; "-ffunction-sections"
-#          ; "-pipe"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
-#          ]
-#      ; ocamlopt_cppflags =
-#          [ "-D_FILE_OFFSET_BITS=64"
-#          ; "-D_REENTRANT"
-#          ; "-DNDEBUG"
-#          ; "-D_FORTIFY_SOURCE=2"
-#          ; "-O2"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
-#          ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fPIC" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
 #      ; bytecomp_c_compiler =
-#          [ "/home/grogalskyj/anaconda3/envs/py37stan2/bin/x86_64-conda-linux-gnu-cc"
+#          [ "gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-fPIC"
-#          ; "-march=nocona"
-#          ; "-mtune=haswell"
-#          ; "-ftree-vectorize"
-#          ; "-fPIC"
-#          ; "-fstack-protector-strong"
-#          ; "-fno-plt"
-#          ; "-O2"
-#          ; "-ffunction-sections"
-#          ; "-pipe"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ; "-D_REENTRANT"
-#          ; "-DNDEBUG"
-#          ; "-D_FORTIFY_SOURCE=2"
-#          ; "-O2"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
 #          ]
-#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread"; "-lrt" ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
 #      ; native_c_compiler =
-#          [ "/home/grogalskyj/anaconda3/envs/py37stan2/bin/x86_64-conda-linux-gnu-cc"
+#          [ "gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-fPIC"
-#          ; "-march=nocona"
-#          ; "-mtune=haswell"
-#          ; "-ftree-vectorize"
-#          ; "-fPIC"
-#          ; "-fstack-protector-strong"
-#          ; "-fno-plt"
-#          ; "-O2"
-#          ; "-ffunction-sections"
-#          ; "-pipe"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ; "-D_REENTRANT"
-#          ; "-DNDEBUG"
-#          ; "-D_FORTIFY_SOURCE=2"
-#          ; "-O2"
-#          ; "-isystem"
-#          ; "/home/grogalskyj/anaconda3/envs/py37stan2/include"
 #          ]
 #      ; native_c_libraries = [ "-lm"; "-ldl" ]
-#      ; native_pack_linker = [ "x86_64-conda-linux-gnu-ld"; "-r"; "-o" ]
 #      ; cc_profile = []
 #      ; architecture = "amd64"
 #      ; model = "default"
 #      ; int_size = 63
 #      ; word_size = 64
 #      ; system = "linux"
-#      ; asm =
-#          [ "/home/grogalskyj/anaconda3/envs/py37stan2/bin/x86_64-conda-linux-gnu-as"
-#          ]
+#      ; asm = [ "as" ]
 #      ; asm_cfi_supported = true
 #      ; with_frame_pointers = false
 #      ; ext_exe = ""
@@ -172,8 +95,8 @@ $ /home/grogalskyj/.opam/4.12.1/bin/ocamlc.opt -config > /tmp/dune_c0c6ad_output
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "x86_64-conda-linux-gnu"
-#      ; target = "x86_64-conda-linux-gnu"
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -193,3 +116,22 @@ $ /home/grogalskyj/.opam/4.12.1/bin/ocamlc.opt -config > /tmp/dune_c0c6ad_output
 #      ; windows_unicode = false
 #      }
 #  }
+$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamldep.opt -modules -impl src/state.ml) > _build/default/src/.game.objs/state.ml.d
+$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__Data_processing.cmx -c -impl src/data_processing.ml)
+> File "src/data_processing.ml", line 1:
+> Error: The implementation src/data_processing.ml
+>        does not match the interface src/.game.objs/byte/game__Data_processing.cmi:
+>        The value `make_game_board' is required but not provided
+>        File "src/data_processing.mli", line 36, characters 0-51:
+>          Expected declaration
+[2]
+$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__Data_processing.cmo -c -impl src/data_processing.ml)
+> File "src/data_processing.ml", line 1:
+> Error: The implementation src/data_processing.ml
+>        does not match the interface src/.game.objs/byte/game__Data_processing.cmi:
+>        The value `make_game_board' is required but not provided
+>        File "src/data_processing.mli", line 36, characters 0-51:
+>          Expected declaration
+[2]
+$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__State.cmo -c -impl src/state.ml)
+$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__State.cmx -c -impl src/state.ml)

@@ -21,3 +21,17 @@ let choose_random_word (dic : string list) : string =
 
 let is_word (word : string) (dic : string list) : bool =
   List.mem word dic
+
+let generate_hidden_words (size : int) (dic : string list) : string list
+    =
+  let return_list = [] in
+  if List.length return_list = size then return_list
+  else choose_random_word dic :: return_list
+
+let make_hidden_words (size : string) (dic : string list) : string list
+    =
+  match size with
+  | "small" -> generate_hidden_words 4 dic
+  | "medium" -> generate_hidden_words 8 dic
+  | "large" -> generate_hidden_words 12 dic
+  | _ -> failwith "not possible"
