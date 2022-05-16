@@ -5,6 +5,15 @@ type state = {
   curr_guess : string;
   char_bank : char list;
 }
+
+type wordsearch_state = {
+  dictionary : string list;
+  hidden_words : string list;
+  found_words : string list;
+  start_time : float;
+  game_board : char list list;
+}
+
 (** The type state is a record that stores all the information for the
     current game being played. [word] is a string that stores the word
     that the player must guess, [remaining_guesses] is an int that
@@ -28,3 +37,5 @@ val check_game_over : state -> bool
 
 val to_string : state -> string
 (** [to_string s] is a string representation of a state*)
+
+val init_wordsearch_game_state : string -> wordsearch_state

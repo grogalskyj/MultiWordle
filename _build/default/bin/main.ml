@@ -172,7 +172,14 @@ let play_wordle () =
 
 let word_search () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
-  print_endline "Word search here!"
+
+  print_endline
+    "Welcome to Wordsearch! Your objective is to spot all the words \n\
+    \  hidden in the grid of letters. When you find a word, type it \
+     into the terminal.When you find all the words, you win! Begin \
+     your adventure by typing small, \n\
+    \  medium or large, to determine the size of your word search game. \n\
+    \  "
 
 let main () =
   ANSITerminal.print_string [ ANSITerminal.red ]
