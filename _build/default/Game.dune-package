@@ -1,4 +1,4 @@
-(lang dune 3.0)
+(lang dune 3.1)
 (name Game)
 (sections (lib .) (libexec .) (doc ../../doc/Game))
 (files
@@ -69,7 +69,7 @@
  (archives (byte game.cma) (native game.cmxa))
  (plugins (byte game.cma) (native game.cmxs))
  (native_archives game.a)
- (requires yojson ANSITerminal graphics)
+ (requires yojson ANSITerminal)
  (main_module_name Game)
  (modes byte native)
  (modules
