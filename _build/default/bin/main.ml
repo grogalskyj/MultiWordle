@@ -51,8 +51,18 @@ let rec game_iter_one game_state : state =
     print_word_bank new_game_state alphabet;
     if check_game_over new_game_state = false then
       game_iter_one new_game_state
-    else new_game_state)
+    else (
+      print_endline
+        "Would you like to play again? Press Y for yes and N for no";
+      print_string "> ";
+      let continue = read_line () in
+      if continue = "Y" then (* play_wordle (); *)
+        new_game_state
+      else new_game_state))
 
+(* else print_endline "Would you like to play again? Press Y for yes and
+   N for no"; print_string "> "; let continue = read_line () in if guess
+   = "Y" then play_wordle (); *)
 let rec game_iter_two_state_update (game_state : state) : unit =
   print_string "> ";
   let input_word = read_line () in
@@ -172,7 +182,6 @@ let play_wordle () =
 
 let word_search () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
-
   print_endline
     "Welcome to Wordsearch! Your objective is to spot all the words \n\
     \  hidden in the grid of letters. When you find a word, type it \

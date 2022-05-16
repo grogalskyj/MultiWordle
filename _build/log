@@ -3,11 +3,11 @@
 # Shared cache: disabled
 # Workspace root: /Users/jasonkatz/Desktop/MultiWordleFinal/MultiWordle
 # Auto-detected concurrency: 10
-$ /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/5s/mnjmbrw925l0j4xm4j4q5t880000gn/T/dune_b98856_output
+$ /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/5s/mnjmbrw925l0j4xm4j4q5t880000gn/T/dune_031714_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
-#  ; profile = Dyn
+#  ; profile = Dev
 #  ; merlin = true
 #  ; for_host = None
 #  ; fdo_target_exe = None
@@ -114,8 +114,11 @@ $ /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/5s/
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamldep.opt -modules -impl src/state.ml) > _build/default/src/.game.objs/state.ml.d
-$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__Data_processing.cmx -c -impl src/data_processing.ml)
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__Data_processing.cmo -c -impl src/data_processing.ml)
+> File "src/data_processing.ml", line 48, characters 8-22:
+> 48 | let rec add_char_array (board_size : int) (return_array : char list) =
+>              ^^^^^^^^^^^^^^
+> Error (warning 39 [unused-rec-flag]): unused rec flag.
 > File "src/data_processing.ml", line 1:
 > Error: The implementation src/data_processing.ml
 >        does not match the interface src/.game.objs/byte/game__Data_processing.cmi:
@@ -123,7 +126,11 @@ $ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w
 >        File "src/data_processing.mli", line 36, characters 0-51:
 >          Expected declaration
 [2]
-$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__Data_processing.cmo -c -impl src/data_processing.ml)
+$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__Data_processing.cmx -c -impl src/data_processing.ml)
+> File "src/data_processing.ml", line 48, characters 8-22:
+> 48 | let rec add_char_array (board_size : int) (return_array : char list) =
+>              ^^^^^^^^^^^^^^
+> Error (warning 39 [unused-rec-flag]): unused rec flag.
 > File "src/data_processing.ml", line 1:
 > Error: The implementation src/data_processing.ml
 >        does not match the interface src/.game.objs/byte/game__Data_processing.cmi:
@@ -131,9 +138,3 @@ $ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @
 >        File "src/data_processing.mli", line 36, characters 0-51:
 >          Expected declaration
 [2]
-$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.game.objs/byte -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/byte/game__State.cmo -c -impl src/state.ml)
-$ (cd _build/default && /home/grogalskyj/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /home/grogalskyj/.opam/cs3110-2021fa/lib/ANSITerminal -I /home/grogalskyj/.opam/cs3110-2021fa/lib/biniou -I /home/grogalskyj/.opam/cs3110-2021fa/lib/bytes -I /home/grogalskyj/.opam/cs3110-2021fa/lib/easy-format -I /home/grogalskyj/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__State.cmx -c -impl src/state.ml)
-$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamldep.opt -modules -impl src/storage.ml) > _build/default/src/.game.objs/storage.ml.d
-$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.game.objs/byte -I src/.game.objs/native -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson -intf-suffix .ml -no-alias-deps -opaque -open Game -o src/.game.objs/native/game__Storage.cmx -c -impl src/storage.ml)
-$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/game.cmxa src/.game.objs/native/game.cmx src/.game.objs/native/game__Wager.cmx src/.game.objs/native/game__Player.cmx src/.game.objs/native/game__Storage.cmx src/.game.objs/native/game__Data_processing.cmx src/.game.objs/native/game__State.cmx src/.game.objs/native/game__Scoring.cmx src/.game.objs/native/game__Gui.cmx src/.game.objs/native/game__Author.cmx)
-$ (cd _build/default && /Users/jasonkatz/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o bin/main.exe /Users/jasonkatz/.opam/cs3110-2021fa/lib/easy-format/easy_format.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/biniou/biniou.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/yojson/yojson.cmxa /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml/unix.cmxa -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ocaml /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal/ANSITerminal.cmxa -I /Users/jasonkatz/.opam/cs3110-2021fa/lib/ANSITerminal src/game.cmxa bin/.main.eobjs/native/dune__exe__Main.cmx)
