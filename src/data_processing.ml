@@ -47,10 +47,27 @@ let character = reverse_index (97 + Random.int 25)
 
 let rec add_char_array (board_size : int) (return_array : char list) =
   if List.length return_array = board_size then return_array
-  else character :: return_array
-(* let fill_in_board (board_size : int): char list list = let
-   return_array = [add_char_array] in if List.length return_array =
-   board_size then
+  else character :: add_char_array board_size return_array
 
-   let make_game_board (hidden_words : string list) : char list list =
-   match List.length hidden_words with | 4 -> fill_in_board 10 *)
+let rec fill_in_board (board_size : int) (return_array : char list list)
+    : char list list =
+  if List.length return_array = board_size then return_array
+  else
+    add_char_array board_size []
+    :: fill_in_board board_size return_array
+
+let make_game_board (hidden_words : string list) : char list list =
+  match List.length hidden_words with
+  | 4 -> fill_in_board 10 []
+  | 5 -> fill_in_board 10 []
+  | 6 -> fill_in_board 10 []
+  | 7 -> fill_in_board 10 []
+  | 8 -> fill_in_board 15 []
+  | 9 -> fill_in_board 15 []
+  | 10 -> fill_in_board 15 []
+  | 11 -> fill_in_board 15 []
+  | 12 -> fill_in_board 20 []
+  | 13 -> fill_in_board 20 []
+  | 14 -> fill_in_board 20 []
+  | 15 -> fill_in_board 20 []
+  | _ -> failwith "to many words :0"
