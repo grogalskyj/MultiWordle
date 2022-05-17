@@ -4,8 +4,6 @@ open State
 open Scoring
 open Storage
 open Player
-
-(* open Wager *)
 open Grid
 
 let alphabet =
@@ -289,8 +287,8 @@ let word_search () =
      of your word search game."
 
 let play_greedy_game () =
-  let grid = generate_randomly_filled_grid 9 9 1 9 in
-  print_grid grid
+  let grid = generate_randomly_filled_int_grid 9 9 1 9 in
+  print_int_grid grid
 
 let play_greedy () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
