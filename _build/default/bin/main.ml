@@ -113,11 +113,55 @@ let rec game_iter_two
       (player_two_points + player_two_round_points)
       (round_number + 1))
 
+let rec word_contains_chars (word : string) (letters : char list) =
+  match word with
+  | "" -> false
+  | _ ->
+      let first_letter = word.[0] in
+      let rest_word = String.sub word 1 (String.length word - 1) in
+      if List.mem first_letter letters then true
+      else word_contains_chars rest_word letters
+
+let generate_devious_word (game_state : state) : string =
+  let word_bank =
+    generate_word_bank
+      (String.length game_state.word)
+      game_state.dictionary
+  in
+  let devious_word_bank =
+    List.filter
+      (fun word ->
+        word_contains_chars word game_state.char_bank = false)
+      word_bank
+  in
+  if List.length devious_word_bank = 0 then game_state.word
+  else List.hd devious_word_bank
+
+let rec game_iter_absurdle (game_state : state) =
+  print_endline "\nYour guess: ";
+  print_string "> ";
+  let guess = read_line () in
+  if String.length guess <> String.length game_state.word then (
+    print_endline
+      "You did not enter a string of valid length. Please try again.";
+    game_iter_absurdle game_state)
+  else if is_word guess game_state.dictionary = false then (
+    print_endline "You did not enter a valid word. Please try again.";
+    game_iter_absurdle game_state)
+  else
+    let new_game_state = update_game_state game_state guess in
+    new_game_state.word <- generate_devious_word new_game_state;
+    print_colored_feedback (score_input guess new_game_state.word);
+    print_word_bank new_game_state alphabet;
+    if new_game_state.curr_guess = new_game_state.word then
+      print_endline "Congrats you guessed the word!\n"
+    else game_iter_absurdle new_game_state
+
 let rec play_game (num_letters : int) =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
-     One Player | Two Player | WagerWordle";
+     One Player | Two Player | Absurdle";
   print_string "> ";
   let input = read_line () in
   match String.lowercase_ascii input with
@@ -147,7 +191,23 @@ let rec play_game (num_letters : int) =
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
-  (* | "WagerWordle" -> game_start_wager game_state *)
+  | "absurdle" ->
+      ANSITerminal.print_string [ ANSITerminal.red ]
+        "\nABSURDLE INSTRUCTIONS\n";
+      print_endline
+        "Welcome to absurdle! This mode is a slight variant of a \
+         similar game made by qntm. In this mode, you must also guess \
+         a target word. However, after every one of your guesses, our \
+         program will change the target word so that your guess is as \
+         different from the new target word as possible. Frequently, \
+         our program will come up with a new target word by scanning \
+         the dictionary for a word that does not have any letters that \
+         you have guessed so far. However, eventually this becomes \
+         impossible, so our program will instead find words that use \
+         as little previously-guessed letters as possible. It will be \
+         nearly impossible to guess the target word in six tries, so \
+         instead you will have unlimited tries to beat the game.";
+      game_iter_absurdle (init_game_state num_letters)
   | _ ->
       print_endline "You did not enter a valid command";
       play_game num_letters
