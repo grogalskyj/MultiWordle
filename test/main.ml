@@ -9,7 +9,11 @@ open Player
 (** [pp_string s] pretty-prints string [s]. *)
 let pp_string s = "\"" ^ s ^ "\""
 
+(** [pp_int i] pretty-prints int [i]. *)
 let pp_int i = "\"" ^ string_of_int i ^ "\""
+
+(** [pp_bool b] pretty-prints bool [b]. *)
+let pp_bool b = "\"" ^ string_of_bool b ^ "\""
 
 (** [score_input_test name user_input correct_word start_index expected_output]
     constructs an OUnit test named [name] that assets the quality of
@@ -108,6 +112,41 @@ let generate_word_bank_test
   name >:: fun _ ->
   assert_equal expected_output (generate_word_bank n d)
 
+(** [choose_random_word_test name dic_list expected_output] constructs
+    an OUnit test named [name] that assets the quality of
+    [expected_output] with
+    [List.mem (Dataprocessing.choose_random_word dic_list) (dict_list)]*)
+let choose_random_word_test
+    (name : string)
+    (dic_list : string list)
+    (expected_output : bool) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (List.mem (choose_random_word dic_list) dic_list)
+    ~printer:pp_bool
+
+(** [is_word_test name w d expected_output] constructs an OUnit test
+    named [name] that assets the quality of [expected_output] with
+    [Dataprocessing.is_word w d]*)
+let is_word_test
+    (name : string)
+    (w : string)
+    (d : string list)
+    (expected_output : bool) =
+  name >:: fun _ ->
+  assert_equal expected_output (is_word w d) ~printer:pp_bool
+
+(** [make_hidden_words_test name size dic expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.make_hidden_words size dic]*)
+let make_hidden_words_test
+    (name : string)
+    (size : string)
+    (dic : string list)
+    (expected_output : string list) =
+  name >:: fun _ ->
+  assert_equal expected_output (make_hidden_words size dic)
+
 let dic =
   Yojson.Basic.from_file "dictionary.json"
   |> to_assoc |> make_dic |> generate_word_bank 5
@@ -117,19 +156,6 @@ let rec check_word_length (word_list : string list) (len : int) =
   | h :: t ->
       if String.length h <> len then false else check_word_length t len
   | [] -> true
-
-(* let generate_word_bank_test (name : string) (dic : Yojson.Basic.t)
-   (num_letters : int) (expected_output : bool) = name >:: fun _ ->
-   assert_equal expected_output (check_word_length (dic |> make_dic |>
-   generate_word_bank num_letters) num_letters) *)
-
-let choose_random_word_test
-    (name : string)
-    (dic_list : string list)
-    (expected_output : bool) =
-  name >:: fun _ ->
-  assert_equal expected_output
-    (choose_random_word dic_list = choose_random_word dic_list)
 
 let scoring_tests =
   [
@@ -168,8 +194,19 @@ let data_processing_tests =
     generate_word_bank_test
       "generating a non-empty word bank for 4 letter words" 4
       testing_dic [ "came"; "loud" ];
+    choose_random_word_test "word is inside dictionary that is provided"
+      dic true;
     choose_random_word_test
-      "Check if words are they same... they shouldn't be..." dic false;
+      "word is inside an alternative dictionary: testing different \
+       words "
+      [ "a"; "b" ] true;
+    is_word_test "word belongs to the dictionary provided" "beach" dic
+      true;
+    is_word_test "word does not belong to the dictionary provided"
+      "beach"
+      [ "sharks"; "dictionary"; "elephants" ]
+      false
+    (*Not sure if can test generate hidden words yet*);
   ]
 
 let word_length = 5

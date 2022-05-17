@@ -30,7 +30,8 @@ val is_word : string -> string list -> bool
     otherwise. *)
 
 val make_hidden_words : string -> string list -> string list
-(** [make_hidden_words] takes a string of value "small", "medium",
-    "large" and returns a string list of 4, 8 , 12 respectively*)
+(** [make_hidden_words size dic] takes a string of value "small",
+    "medium", "large" and returns a string list of 4, 8 , 12
+    respectively*)
 
 val make_game_board : string list -> char list list
