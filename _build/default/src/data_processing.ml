@@ -56,6 +56,45 @@ let rec fill_in_board (board_size : int) (return_array : char list list)
     add_char_array board_size []
     :: fill_in_board board_size return_array
 
+let string_to_char_list s =
+  let rec exp i l = if i < 0 then l else exp (i - 1) (s.[i] :: l) in
+  exp (String.length s - 1) []
+
+let hide_word_horizontal (word : string) (char_matrix : char list list)
+    : char list list =
+  let word_len = String.length word in
+  let mat_len = List.length char_matrix in
+  let col_seed = Random.int mat_len - word_len in
+  let row_seed = Random.int word_len in
+  char_matrix
+
+let hide_word_vertical (word : string) (char_matrix : char list list) :
+    char list list =
+  failwith "todo"
+
+let hide_word_diagonal (word : string) (char_matrix : char list list) :
+    char list list =
+  failwith "todo"
+
+let rec hide_words_in_board
+    (hidden_words : string list)
+    (char_matrix : char list list) : char list list =
+  match hidden_words with
+  | [] -> char_matrix
+  | h :: t -> (
+      let word_pattern = Random.int 2 in
+      match word_pattern with
+      | 0 ->
+          let new_char_matrix = hide_word_horizontal h char_matrix in
+          hide_words_in_board t new_char_matrix
+      | 1 ->
+          let new_char_matrix = hide_word_vertical h char_matrix in
+          hide_words_in_board t new_char_matrix
+      | 2 ->
+          let new_char_matrix = hide_word_diagonal h char_matrix in
+          hide_words_in_board t new_char_matrix
+      | _ -> failwith "failure")
+
 let make_game_board (hidden_words : string list) : char list list =
   match List.length hidden_words with
   | 4 -> fill_in_board 10 []
@@ -70,4 +109,4 @@ let make_game_board (hidden_words : string list) : char list list =
   | 13 -> fill_in_board 20 []
   | 14 -> fill_in_board 20 []
   | 15 -> fill_in_board 20 []
-  | _ -> failwith "to many words :0"
+  | _ -> failwith "too many words :0"
