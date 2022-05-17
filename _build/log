@@ -1,4 +1,4 @@
-# dune exec bin/main.exe
+# dune build
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Workspace root: /Users/charleswang/CS_3110_Final_Project/MultiWordle

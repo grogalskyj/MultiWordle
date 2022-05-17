@@ -165,14 +165,29 @@ let rec play_game (num_letters : int) =
   print_string "> ";
   let input = read_line () in
   match String.lowercase_ascii input with
-  | "one player" ->
+  | "one player" -> (
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nONE PLAYER INSTRUCTIONS\n";
       print_endline
         "Welcome to one player mode! This mode simulates a classic \
          Wordle game where you have six attempts to guess a \
          predetermined word.";
-      ignore (game_iter_one (init_game_state num_letters))
+      let end_state = game_iter_one (init_game_state num_letters) in
+      print_string "Here are your summary statistics.";
+      print_endline ("Username: " ^ "INSERT THIS");
+      print_endline ("Number of games played: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses need per game: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses needed for last three games: "
+       ^ "INSERT THIS");
+      print_endline
+        "Would you like to play again? Press Y for yes and N for no";
+      print_string "> ";
+      let continue = read_line () in
+      match continue with
+      | "Y" -> play_game num_letters
+      | _ -> ignore end_state)
   | "two player" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nTWO PLAYER INSTRUCTIONS\n";
@@ -212,7 +227,7 @@ let rec play_game (num_letters : int) =
       print_endline "You did not enter a valid command";
       play_game num_letters
 
-let main () =
+let play_wordle () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
     "Welcome to MultiWordle! Your objective is to guess a \
@@ -229,5 +244,27 @@ let main () =
   let s = read_line () in
   try play_game (int_of_string s)
   with _ -> print_endline "You did not enter a valid command"
+
+let word_search () =
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
+  print_endline
+    "Welcome to Wordsearch! Your objective is to spot all the words \n\
+    \  hidden in the grid of letters. When you find a word, type it \
+     into the terminal.When you find all the words, you win! Begin \
+     your adventure by typing small, \n\
+    \  medium or large, to determine the size of your word search game. \n\
+    \  "
+
+let main () =
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "\n\
+    \ Welcome to Our Word Arcade. Please Choose from the following \
+     Games: | MultiWordle | Word Search |";
+  print_string "> ";
+  let s = read_line () in
+  match s with
+  | "MultiWordle" -> play_wordle ()
+  | "Word Search" -> word_search ()
+  | _ -> print_endline "You did not enter a valid command"
 
 let () = main ()

@@ -3,9 +3,13 @@ open Yojson.Basic.Util
 open Game
 open State
 open Data_processing
+open Storage
+open Player
 
 (** [pp_string s] pretty-prints string [s]. *)
 let pp_string s = "\"" ^ s ^ "\""
+
+let pp_int i = "\"" ^ string_of_int i ^ "\""
 
 (** [score_input_test name user_input correct_word start_index expected_output]
     constructs an OUnit test named [name] that assets the quality of
@@ -19,6 +23,69 @@ let score_input_test
   assert_equal expected_output
     (Scoring.score_input user_input correct_word)
     ~printer:pp_string
+
+(** [make_player_test name username password expected_output] constructs
+    an OUnit test named [name] that assets the quality of
+    [expected_output] with [Player.make_player username password]*)
+let make_player_test
+    (name : string)
+    (username : string)
+    (password : string)
+    (expected_output : player) =
+  name >:: fun _ ->
+  assert_equal expected_output (Player.make_player username password)
+
+(** [update_player_test name last_game_length last_game_guesses user expected_output]
+    constructs an OUnit test named [name] that assets the quality of
+    [expected_output] with
+    [Player.update_player last_game_length last_game_guesses user]*)
+let update_player_test
+    (name : string)
+    (last_game_length : int)
+    (last_game_guesses : int)
+    (user : player)
+    (expected_output : unit) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (Player.update_player last_game_length last_game_guesses user)
+
+(** [games_played_test name username player_database expected_output]
+    constructs an OUnit test named [name] that assets the quality of
+    [expected_output] with
+    [Storage.games_played username player_database]*)
+let games_played_test
+    (name : string)
+    (username : string)
+    (player_database : (string * player) list)
+    (expected_output : int) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (Storage.games_played username player_database)
+    ~printer:pp_int
+
+(** [average_guesses_test guess_list expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Storage.average_guesses guess_list]*)
+let average_guesses_test
+    (name : string)
+    (guess_list : int list)
+    (expected_output : int) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (Storage.average_guesses guess_list)
+    ~printer:pp_int
+
+(** [guess_trend_test guess_list expected_output] constructs an OUnit
+    test named [name] that assets the quality of [expected_output] with
+    [Storage.guess_trend guess_list]*)
+let guess_trend_test
+    (name : string)
+    (guess_list : int list)
+    (expected_output : int) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (Storage.guess_trend guess_list)
+    ~printer:pp_int
 
 let check_start_game_tst
     (name : string)
@@ -53,11 +120,17 @@ let choose_random_word_test
 let scoring_tests =
   [
     score_input_test "Empty input" "" "bands" "_____";
-    score_input_test "Guessed correct word" "bands" "bands" "BANDS";
+    score_input_test "Guessed correct word 5 letter" "bands" "bands"
+      "BANDS";
+    score_input_test "Guessed correct word double-check" "beach" "beach"
+      "BEACH";
+    score_input_test "Guessed correct word different capitalization"
+      "bAnDs" "bands" "BANDS";
     score_input_test "Proper feedback" "hates" "bands" "_A__S";
-    score_input_test "Proper feedback 2" "money" "epoxy" "_o_eY"
-    (* score_input_test "Input with no correct letters" "lover" "bands"
-       0 "_ _ _ _ _" *);
+    score_input_test "Proper feedback 2" "money" "epoxy" "_o_eY";
+    score_input_test "Input with no correct letters" "trunk" "beach"
+      "_____";
+    score_input_test "3 letter correct word" "bed" "bed" "BED";
   ]
 
 let data_processing_tests =
@@ -109,10 +182,68 @@ let state_tests =
       assert_equal true (check_game_over st4) );
   ]
 
+let player1 = make_player "bananalover34" "monkey"
+let player2 = make_player "ocaml" "pragmaticprogrammer"
+let player3 = update_player 4 5 (make_player "bananalover34" "monkey")
+
+let player4 =
+  update_player 5 6 (make_player "ocaml" "pragmaticprogrammer")
+
+let player_tests =
+  [
+    make_player_test "player1 test" "bananalover34" "monkey" player1;
+    make_player_test "player2 test" "ocaml" "pragmaticprogrammer"
+      player2;
+    update_player_test "adding one game of history to player1" 4 5
+      player1 player3;
+    update_player_test "adding one game of history to player2" 5 6
+      player2 player4;
+  ]
+
+let no_player_database = init_database
+
+let one_player_database =
+  update_database "bananalover34"
+    {
+      username = "bananalover34";
+      password = "monkey";
+      game_history = [];
+    }
+    no_player_database
+
+let two_player_database =
+  update_database "ocaml"
+    {
+      username = "ocaml";
+      password = "pragmaticprogrammer";
+      game_history = [ (1, 2) ];
+    }
+    one_player_database
+
+let storage_tests =
+  [
+    games_played_test "no games played" "bananalover34"
+      one_player_database 0;
+    games_played_test "one game played" "ocaml" two_player_database 1;
+    average_guesses_test "no games played" [] 0;
+    average_guesses_test "multiple games played" [ 2; 4; 6 ] 4;
+    guess_trend_test "no guesses" [] 0;
+    guess_trend_test "one guess" [ 1 ] 1;
+    guess_trend_test "two guesses" [ 1; 3 ] 2;
+    guess_trend_test "three guesses" [ 2; 4; 6 ] 4;
+    guess_trend_test "more than three guesses" [ 3; 4; 6; 7 ] 4;
+  ]
+
 let suite =
   "test suite for MultiWordle"
   >::: List.flatten
-         [ scoring_tests; state_tests; data_processing_tests ]
+         [
+           scoring_tests;
+           state_tests;
+           data_processing_tests;
+           storage_tests;
+           player_tests;
+         ]
 
 let _ = run_test_tt_main suite
 
