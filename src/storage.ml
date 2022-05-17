@@ -13,12 +13,14 @@ let rec get_usernames (database : player_database) : string list =
   | [ (h, _) ] -> [ h ]
   | (h, _) :: t -> h :: get_usernames t
 
-(* let get_game_history (player_record : player) : (int * int) list =
-   player_record.game_history *)
+let get_game_history (player_record : player) : (int * int) list =
+  player_record.game_history
 
-(* let rec get_guesses (history : (int * int) list) : int list = match
-   history with | [] -> [] | [ (_, guess) ] -> [ guess ] | (_, guess) ::
-   t -> guess :: get_guesses t *)
+let rec get_guesses (history : (int * int) list) : int list =
+  match history with
+  | [] -> []
+  | [ (_, guess) ] -> [ guess ]
+  | (_, guess) :: t -> guess :: get_guesses t
 
 let get_player_record (username : string) (database : player_database) :
     player =
@@ -50,5 +52,12 @@ let average_guesses (guesses : int list) : int =
     sum / List.length guesses
   else 0
 
+let get_average_guesses (player_record : player) : int =
+  get_game_history player_record |> get_guesses |> average_guesses
+
 let guess_trend (guesses : int list) : int =
   guesses |> last_three |> average_guesses
+
+let get_guess_trend (player : player) : int =
+  player |> get_game_history |> get_guesses |> last_three
+  |> average_guesses

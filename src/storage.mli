@@ -17,11 +17,16 @@ val games_played : string -> player_database -> int
 (** [games_played username player_database] calculates the total number
     of games that a specific user has played.*)
 
-val average_guesses : int list -> int
-(** [average_guesses guess_list] calculates the average number of
-    guesses it takes a specific user to guess a word.*)
+val get_average_guesses : player -> int
+(** [get_average_guesses player_record] generates the average number of
+    guesses it takes a specific user to guess a word in Wordle.*)
 
 val guess_trend : int list -> int
-(** [recent_guess-trend username player_database] calculates the average
-    number of guess it has taken a specific user to guess a word in
-    their last 3 games played. *)
+(** [guess_trend guess_list] calculates the average number of guesses
+    needed to guess a word on the last three attempts for a given
+    player's list of guesses*)
+
+val get_guess_trend : player -> int
+(** [get_guess_trend player] calculates the average number of guess it
+    has taken a specific user to guess a word in their last 3 games
+    played. *)

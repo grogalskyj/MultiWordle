@@ -202,14 +202,20 @@ let rec play_wordle_game
          predetermined word.";
 
       let end_state = game_iter_one (init_game_state num_letters) in
+      update_player 1 1 existing_player;
+      (*FIX 1 1*)
       print_string "Here are your summary statistics.";
-      print_endline ("Username: " ^ "INSERT THIS");
-      print_endline ("Number of games played: " ^ "INSERT THIS");
+      print_endline ("Username: " ^ existing_player.username);
       print_endline
-        ("Average number of guesses need per game: " ^ "INSERT THIS");
+        ("Number of games played: "
+        ^ string_of_int (games_played existing_player.username database)
+        );
+      print_endline
+        ("Average number of guesses need per game: "
+        ^ string_of_int (existing_player |> get_average_guesses));
       print_endline
         ("Average number of guesses needed for last three games: "
-       ^ "INSERT THIS");
+        ^ string_of_int (get_guess_trend existing_player));
       print_endline
         "Would you like to play again? Press Y for yes and N for no";
       print_string "> ";

@@ -63,16 +63,16 @@ let games_played_test
     (Storage.games_played username player_database)
     ~printer:pp_int
 
-(** [average_guesses_test guess_list expected_output] constructs an
-    OUnit test named [name] that assets the quality of [expected_output]
-    with [Storage.average_guesses guess_list]*)
+(** [average_guesses_test player expected_output] constructs an OUnit
+    test named [name] that assets the quality of [expected_output] with
+    [Storage.get_average_guesses player]*)
 let average_guesses_test
     (name : string)
-    (guess_list : int list)
+    (player : player)
     (expected_output : int) =
   name >:: fun _ ->
   assert_equal expected_output
-    (Storage.average_guesses guess_list)
+    (Storage.get_average_guesses player)
     ~printer:pp_int
 
 (** [guess_trend_test guess_list expected_output] constructs an OUnit
@@ -189,6 +189,9 @@ let player3 = update_player 4 5 (make_player "bananalover34" "monkey")
 let player4 =
   update_player 5 6 (make_player "ocaml" "pragmaticprogrammer")
 
+let player5 = make_player "username" "password"
+let updated_player5 = update_player 3 4 player5
+
 let player_tests =
   [
     make_player_test "player1 test" "bananalover34" "monkey" player1;
@@ -225,8 +228,11 @@ let storage_tests =
     games_played_test "no games played" "bananalover34"
       one_player_database 0;
     games_played_test "one game played" "ocaml" two_player_database 1;
-    average_guesses_test "no games played" [] 0;
-    average_guesses_test "multiple games played" [ 2; 4; 6 ] 4;
+    average_guesses_test "no games played" player1 0;
+    average_guesses_test "non-empty game history"
+      (updated_player5;
+       player5)
+      4;
     guess_trend_test "no guesses" [] 0;
     guess_trend_test "one guess" [ 1 ] 1;
     guess_trend_test "two guesses" [ 1; 3 ] 2;
