@@ -2,6 +2,8 @@ open Game
 open Data_processing
 open State
 open Scoring
+open Storage
+open Player
 (* open Wager *)
 
 let alphabet =
@@ -34,7 +36,7 @@ let alphabet =
     'm';
   ]
 
-let rec game_iter_one game_state : state =
+let rec game_iter_one (game_state : state) : state =
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
@@ -157,7 +159,8 @@ let rec game_iter_absurdle (game_state : state) =
       print_endline "Congrats you guessed the word!\n"
     else game_iter_absurdle new_game_state
 
-let rec play_game (num_letters : int) =
+let rec play_game (num_letters : int) (database : player_database) :
+    unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
@@ -166,12 +169,37 @@ let rec play_game (num_letters : int) =
   let input = read_line () in
   match String.lowercase_ascii input with
   | "one player" -> (
-      ANSITerminal.print_string [ ANSITerminal.red ]
-        "\nONE PLAYER INSTRUCTIONS\n";
+      print_endline "Please enter the Username you wish to play under";
+      print_string "> :";
+      let username = read_line () in
+      let existing_player =
+        try List.assoc username database
+        with _ -> (
+          print_endline
+            "Username not found. Press T to try again, or C to create \
+             a user profile with this username";
+          let next_move = read_line () in
+          match next_move with
+          | "C" ->
+              print_endline "Please enter a password for this username";
+              print_string "> :";
+              let password = read_line () in
+
+              let new_player = make_player username password in
+              ignore (update_database username new_player database);
+              new_player
+          | _ -> make_player "" "")
+      in
+      if existing_player.username = "" then
+        play_game num_letters database
+      else
+        ANSITerminal.print_string [ ANSITerminal.red ]
+          "\nONE PLAYER INSTRUCTIONS\n";
       print_endline
         "Welcome to one player mode! This mode simulates a classic \
          Wordle game where you have six attempts to guess a \
          predetermined word.";
+
       let end_state = game_iter_one (init_game_state num_letters) in
       print_string "Here are your summary statistics.";
       print_endline ("Username: " ^ "INSERT THIS");
@@ -186,7 +214,8 @@ let rec play_game (num_letters : int) =
       print_string "> ";
       let continue = read_line () in
       match continue with
-      | "Y" -> play_game num_letters
+      | "Y" ->
+          play_game num_letters database (*CHANGE DATABASE TO UPDATED*)
       | _ -> ignore end_state)
   | "two player" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
@@ -225,9 +254,10 @@ let rec play_game (num_letters : int) =
       game_iter_absurdle (init_game_state num_letters)
   | _ ->
       print_endline "You did not enter a valid command";
-      play_game num_letters
+      play_game num_letters database
+(*UPDATE TO HAVE NEW DATABASE*)
 
-let play_wordle () =
+let play_wordle (database : player_database) () : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
     "Welcome to MultiWordle! Your objective is to guess a \
@@ -242,7 +272,7 @@ let play_wordle () =
      word you will be guessing.\n";
   print_string "> ";
   let s = read_line () in
-  try play_game (int_of_string s)
+  try play_game (int_of_string s) database
   with _ -> print_endline "You did not enter a valid command"
 
 let word_search () =
@@ -255,15 +285,34 @@ let word_search () =
     \  medium or large, to determine the size of your word search game. \n\
     \  "
 
-let main () =
+let main () : unit =
+  let database = init_database in
+
   ANSITerminal.print_string [ ANSITerminal.red ]
     "\n\
-    \ Welcome to Our Word Arcade. Please Choose from the following \
-     Games: | MultiWordle | Word Search |";
+    \ Welcome to our Word Arcade. To begin, please enter the name of \
+     the Username you wish to use.";
+
+  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+
+  let username = read_line () in
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "\n Now please enter a Password for this user profile.";
+
+  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+
+  let password = read_line () in
+  let new_player = Player.make_player username password in
+
+  let new_database = update_database username new_player database in
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "Please Choose from the following Games: | MultiWordle | Word \
+     Search |";
   print_string "> ";
+
   let s = read_line () in
   match s with
-  | "MultiWordle" -> play_wordle ()
+  | "MultiWordle" -> play_wordle new_database ()
   | "Word Search" -> word_search ()
   | _ -> print_endline "You did not enter a valid command"
 
