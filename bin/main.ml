@@ -2,7 +2,11 @@ open Game
 open Data_processing
 open State
 open Scoring
+open Storage
+open Player
+
 (* open Wager *)
+open Grid
 
 let alphabet =
   [
@@ -34,7 +38,7 @@ let alphabet =
     'm';
   ]
 
-let rec game_iter_one game_state : state =
+let rec game_iter_one (game_state : state) : state =
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
@@ -113,21 +117,92 @@ let rec game_iter_two
       (player_two_points + player_two_round_points)
       (round_number + 1))
 
-let rec play_game (num_letters : int) : unit =
+let rec word_contains_chars (word : string) (letters : char list) =
+  match word with
+  | "" -> false
+  | _ ->
+      let first_letter = word.[0] in
+      let rest_word = String.sub word 1 (String.length word - 1) in
+      if List.mem first_letter letters then true
+      else word_contains_chars rest_word letters
+
+let generate_devious_word (game_state : state) : string =
+  let word_bank =
+    generate_word_bank
+      (String.length game_state.word)
+      game_state.dictionary
+  in
+  let devious_word_bank =
+    List.filter
+      (fun word ->
+        word_contains_chars word game_state.char_bank = false)
+      word_bank
+  in
+  if List.length devious_word_bank = 0 then game_state.word
+  else List.hd devious_word_bank
+
+let rec game_iter_absurdle (game_state : state) =
+  print_endline "\nYour guess: ";
+  print_string "> ";
+  let guess = read_line () in
+  if String.length guess <> String.length game_state.word then (
+    print_endline
+      "You did not enter a string of valid length. Please try again.";
+    game_iter_absurdle game_state)
+  else if is_word guess game_state.dictionary = false then (
+    print_endline "You did not enter a valid word. Please try again.";
+    game_iter_absurdle game_state)
+  else
+    let new_game_state = update_game_state game_state guess in
+    new_game_state.word <- generate_devious_word new_game_state;
+    print_colored_feedback (score_input guess new_game_state.word);
+    print_word_bank new_game_state alphabet;
+    if new_game_state.curr_guess = new_game_state.word then
+      print_endline "Congrats you guessed the word!\n"
+    else game_iter_absurdle new_game_state
+
+let rec play_wordle_game
+    (num_letters : int)
+    (database : player_database) : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
-     One Player | Two Player | WagerWordle";
+     One Player | Two Player | Absurdle";
   print_string "> ";
   let input = read_line () in
   match String.lowercase_ascii input with
   | "one player" -> (
-      ANSITerminal.print_string [ ANSITerminal.red ]
-        "\nONE PLAYER INSTRUCTIONS\n";
+      print_endline "Please enter the Username you wish to play under";
+      print_string "> :";
+      let username = read_line () in
+      let existing_player =
+        try List.assoc username database
+        with _ -> (
+          print_endline
+            "Username not found. Press T to try again, or C to create \
+             a user profile with this username";
+          let next_move = read_line () in
+          match next_move with
+          | "C" ->
+              print_endline "Please enter a password for this username";
+              print_string "> :";
+              let password = read_line () in
+
+              let new_player = make_player username password in
+              ignore (update_database username new_player database);
+              new_player
+          | _ -> make_player "" "")
+      in
+      if existing_player.username = "" then
+        play_wordle_game num_letters database
+      else
+        ANSITerminal.print_string [ ANSITerminal.red ]
+          "\nONE PLAYER INSTRUCTIONS\n";
       print_endline
         "Welcome to one player mode! This mode simulates a classic \
          Wordle game where you have six attempts to guess a \
          predetermined word.";
+
       let end_state = game_iter_one (init_game_state num_letters) in
       print_string "Here are your summary statistics.";
       print_endline ("Username: " ^ "INSERT THIS");
@@ -142,7 +217,9 @@ let rec play_game (num_letters : int) : unit =
       print_string "> ";
       let continue = read_line () in
       match continue with
-      | "Y" -> play_game num_letters
+      | "Y" ->
+          play_wordle_game num_letters database
+          (*CHANGE DATABASE TO UPDATED*)
       | _ -> ignore end_state)
   | "two player" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
@@ -162,12 +239,29 @@ let rec play_game (num_letters : int) : unit =
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
-  (* | "WagerWordle" -> game_start_wager game_state *)
+  | "absurdle" ->
+      ANSITerminal.print_string [ ANSITerminal.red ]
+        "\nABSURDLE INSTRUCTIONS\n";
+      print_endline
+        "Welcome to absurdle! This mode is a slight variant of a \
+         similar game made by qntm. In this mode, you must also guess \
+         a target word. However, after every one of your guesses, our \
+         program will change the target word so that your guess is as \
+         different from the new target word as possible. Frequently, \
+         our program will come up with a new target word by scanning \
+         the dictionary for a word that does not have any letters that \
+         you have guessed so far. However, eventually this becomes \
+         impossible, so our program will instead find words that use \
+         as little previously-guessed letters as possible. It will be \
+         nearly impossible to guess the target word in six tries, so \
+         instead you will have unlimited tries to beat the game.";
+      game_iter_absurdle (init_game_state num_letters)
   | _ ->
       print_endline "You did not enter a valid command";
-      play_game num_letters
+      play_wordle_game num_letters database
+(*UPDATE TO HAVE NEW DATABASE*)
 
-let play_wordle () =
+let play_wordle (database : player_database) () : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
     "Welcome to MultiWordle! Your objective is to guess a \
@@ -182,29 +276,73 @@ let play_wordle () =
      word you will be guessing.\n";
   print_string "> ";
   let s = read_line () in
-  try play_game (int_of_string s)
+  try play_wordle_game (int_of_string s) database
   with _ -> print_endline "You did not enter a valid command"
 
 let word_search () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
-    "Welcome to Wordsearch! Your objective is to spot all the words \n\
-    \  hidden in the grid of letters. When you find a word, type it \
-     into the terminal.When you find all the words, you win! Begin \
-     your adventure by typing small, \n\
-    \  medium or large, to determine the size of your word search game. \n\
-    \  "
+    "Welcome to Wordsearch! Your objective is to spot all the words \
+     hidden in the grid of letters. When you find a word, type it into \
+     the terminal.When you find all the words, you win! Begin your \
+     adventure by typing small, medium or large, to determine the size \
+     of your word search game."
 
-let main () =
+let play_greedy_game () =
+  let grid = generate_randomly_filled_grid 9 9 1 9 in
+  print_grid grid
+
+let play_greedy () =
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
+  print_endline
+    "Welcome to Greedy! Your objective is to continually move through \
+     a 9 by 9 grid while picking up coins. Each cell in the grid \
+     contains a certain number of coins. At the beginning of the game, \
+     you will find yourself in the middle of the grid, at which point \
+     you may take a step to the left, right, up, or down. If you move \
+     into a cell containing x amount of coins, you will pick up x \
+     coins, but you will also need to move x steps in the next round. \
+     You may only pick up coins when ending your steps in a cell. So \
+     in the previous examples, you may only pick up the coins on the \
+     cell you end up on after taking x steps. You may not revisit the \
+     cells that you pass through when completing those x steps. The \
+     game ends when you cannot possibly move to the left, right, up, \
+     or down without moving off the grid or revisiting a visited cell. \
+     Your final score is your coin efficiency, that is the number of \
+     coins you collected divided by the number of steps you took \
+     during the game.\n";
+  play_greedy_game ()
+
+let main () : unit =
+  let database = init_database in
+
   ANSITerminal.print_string [ ANSITerminal.red ]
     "\n\
-    \ Welcome to Our Word Arcade. Please Choose from the following \
-     Games: | MultiWordle | Word Search |";
+    \ Welcome to our Arcade. To begin, please enter the name of the \
+     Username you wish to use.";
+
+  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+
+  let username = read_line () in
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "\n Now please enter a Password for this user profile.";
+
+  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+
+  let password = read_line () in
+  let new_player = Player.make_player username password in
+
+  let new_database = update_database username new_player database in
+  ANSITerminal.print_string [ ANSITerminal.red ]
+    "Please Choose from the following games modes: | MultiWordle | \
+     Word Search | Greedy";
   print_string "> ";
+
   let s = read_line () in
-  match s with
-  | "MultiWordle" -> play_wordle ()
-  | "Word Search" -> word_search ()
+  match String.lowercase_ascii s with
+  | "multiwordle" -> play_wordle new_database ()
+  | "word search" -> word_search ()
+  | "greedy" -> play_greedy ()
   | _ -> print_endline "You did not enter a valid command"
 
 let () = main ()
