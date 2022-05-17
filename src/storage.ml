@@ -2,6 +2,11 @@ open Player
 
 type player_database = (string * player) list
 
+let init_database = []
+
+let update_database username player database =
+  (username, player) :: database
+
 let rec get_usernames (database : player_database) : string list =
   match database with
   | [] -> []
@@ -40,8 +45,10 @@ let last_three lst =
   | h :: m :: t :: _ -> [ h; m; t ]
 
 let average_guesses (guesses : int list) : int =
-  let sum = list_sum guesses in
-  sum / List.length guesses
+  if List.length guesses <> 0 then
+    let sum = list_sum guesses in
+    sum / List.length guesses
+  else 0
 
 let guess_trend (guesses : int list) : int =
   guesses |> last_three |> average_guesses

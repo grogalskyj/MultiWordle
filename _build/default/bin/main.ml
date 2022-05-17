@@ -51,18 +51,8 @@ let rec game_iter_one game_state : state =
     print_word_bank new_game_state alphabet;
     if check_game_over new_game_state = false then
       game_iter_one new_game_state
-    else (
-      print_endline
-        "Would you like to play again? Press Y for yes and N for no";
-      print_string "> ";
-      let continue = read_line () in
-      if continue = "Y" then (* play_wordle (); *)
-        new_game_state
-      else new_game_state))
+    else new_game_state)
 
-(* else print_endline "Would you like to play again? Press Y for yes and
-   N for no"; print_string "> "; let continue = read_line () in if guess
-   = "Y" then play_wordle (); *)
 let rec game_iter_two_state_update (game_state : state) : unit =
   print_string "> ";
   let input_word = read_line () in
@@ -123,7 +113,7 @@ let rec game_iter_two
       (player_two_points + player_two_round_points)
       (round_number + 1))
 
-let rec play_game (num_letters : int) =
+let rec play_game (num_letters : int) : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
@@ -131,14 +121,29 @@ let rec play_game (num_letters : int) =
   print_string "> ";
   let input = read_line () in
   match String.lowercase_ascii input with
-  | "one player" ->
+  | "one player" -> (
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nONE PLAYER INSTRUCTIONS\n";
       print_endline
         "Welcome to one player mode! This mode simulates a classic \
          Wordle game where you have six attempts to guess a \
          predetermined word.";
-      ignore (game_iter_one (init_game_state num_letters))
+      let end_state = game_iter_one (init_game_state num_letters) in
+      print_string "Here are your summary statistics.";
+      print_endline ("Username: " ^ "INSERT THIS");
+      print_endline ("Number of games played: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses need per game: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses needed for last three games: "
+       ^ "INSERT THIS");
+      print_endline
+        "Would you like to play again? Press Y for yes and N for no";
+      print_string "> ";
+      let continue = read_line () in
+      match continue with
+      | "Y" -> play_game num_letters
+      | _ -> ignore end_state)
   | "two player" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nTWO PLAYER INSTRUCTIONS\n";
