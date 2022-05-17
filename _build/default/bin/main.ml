@@ -129,6 +129,14 @@ let rec play_game (num_letters : int) : unit =
          Wordle game where you have six attempts to guess a \
          predetermined word.";
       let end_state = game_iter_one (init_game_state num_letters) in
+      print_string "Here are your summary statistics.";
+      print_endline ("Username: " ^ "INSERT THIS");
+      print_endline ("Number of games played: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses need per game: " ^ "INSERT THIS");
+      print_endline
+        ("Average number of guesses needed for last three games: "
+       ^ "INSERT THIS");
       print_endline
         "Would you like to play again? Press Y for yes and N for no";
       print_string "> ";
