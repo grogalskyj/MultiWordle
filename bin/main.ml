@@ -4,7 +4,9 @@ open State
 open Scoring
 open Storage
 open Player
+
 (* open Wager *)
+open Grid
 
 let alphabet =
   [
@@ -159,8 +161,9 @@ let rec game_iter_absurdle (game_state : state) =
       print_endline "Congrats you guessed the word!\n"
     else game_iter_absurdle new_game_state
 
-let rec play_game (num_letters : int) (database : player_database) :
-    unit =
+let rec play_wordle_game
+    (num_letters : int)
+    (database : player_database) : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\nGAME MODE\n";
   print_endline
     "Select one of the game modes below to get started\n\
@@ -191,7 +194,7 @@ let rec play_game (num_letters : int) (database : player_database) :
           | _ -> make_player "" "")
       in
       if existing_player.username = "" then
-        play_game num_letters database
+        play_wordle_game num_letters database
       else
         ANSITerminal.print_string [ ANSITerminal.red ]
           "\nONE PLAYER INSTRUCTIONS\n";
@@ -215,7 +218,8 @@ let rec play_game (num_letters : int) (database : player_database) :
       let continue = read_line () in
       match continue with
       | "Y" ->
-          play_game num_letters database (*CHANGE DATABASE TO UPDATED*)
+          play_wordle_game num_letters database
+          (*CHANGE DATABASE TO UPDATED*)
       | _ -> ignore end_state)
   | "two player" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
@@ -254,7 +258,7 @@ let rec play_game (num_letters : int) (database : player_database) :
       game_iter_absurdle (init_game_state num_letters)
   | _ ->
       print_endline "You did not enter a valid command";
-      play_game num_letters database
+      play_wordle_game num_letters database
 (*UPDATE TO HAVE NEW DATABASE*)
 
 let play_wordle (database : player_database) () : unit =
@@ -272,26 +276,50 @@ let play_wordle (database : player_database) () : unit =
      word you will be guessing.\n";
   print_string "> ";
   let s = read_line () in
-  try play_game (int_of_string s) database
+  try play_wordle_game (int_of_string s) database
   with _ -> print_endline "You did not enter a valid command"
 
 let word_search () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
-    "Welcome to Wordsearch! Your objective is to spot all the words \n\
-    \  hidden in the grid of letters. When you find a word, type it \
-     into the terminal.When you find all the words, you win! Begin \
-     your adventure by typing small, \n\
-    \  medium or large, to determine the size of your word search game. \n\
-    \  "
+    "Welcome to Wordsearch! Your objective is to spot all the words \
+     hidden in the grid of letters. When you find a word, type it into \
+     the terminal.When you find all the words, you win! Begin your \
+     adventure by typing small, medium or large, to determine the size \
+     of your word search game."
+
+let play_greedy_game () =
+  let grid = generate_randomly_filled_grid 9 9 1 9 in
+  print_grid grid
+
+let play_greedy () =
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
+  print_endline
+    "Welcome to Greedy! Your objective is to continually move through \
+     a 9 by 9 grid while picking up coins. Each cell in the grid \
+     contains a certain number of coins. At the beginning of the game, \
+     you will find yourself in the middle of the grid, at which point \
+     you may take a step to the left, right, up, or down. If you move \
+     into a cell containing x amount of coins, you will pick up x \
+     coins, but you will also need to move x steps in the next round. \
+     You may only pick up coins when ending your steps in a cell. So \
+     in the previous examples, you may only pick up the coins on the \
+     cell you end up on after taking x steps. You may not revisit the \
+     cells that you pass through when completing those x steps. The \
+     game ends when you cannot possibly move to the left, right, up, \
+     or down without moving off the grid or revisiting a visited cell. \
+     Your final score is your coin efficiency, that is the number of \
+     coins you collected divided by the number of steps you took \
+     during the game.\n";
+  play_greedy_game ()
 
 let main () : unit =
   let database = init_database in
 
   ANSITerminal.print_string [ ANSITerminal.red ]
     "\n\
-    \ Welcome to our Word Arcade. To begin, please enter the name of \
-     the Username you wish to use.";
+    \ Welcome to our Arcade. To begin, please enter the name of the \
+     Username you wish to use.";
 
   ANSITerminal.print_string [ ANSITerminal.red ] "> :";
 
@@ -306,14 +334,15 @@ let main () : unit =
 
   let new_database = update_database username new_player database in
   ANSITerminal.print_string [ ANSITerminal.red ]
-    "Please Choose from the following Games: | MultiWordle | Word \
-     Search |";
+    "Please Choose from the following games modes: | MultiWordle | \
+     Word Search | Greedy";
   print_string "> ";
 
   let s = read_line () in
-  match s with
-  | "MultiWordle" -> play_wordle new_database ()
-  | "Word Search" -> word_search ()
+  match String.lowercase_ascii s with
+  | "multiwordle" -> play_wordle new_database ()
+  | "word search" -> word_search ()
+  | "greedy" -> play_greedy ()
   | _ -> print_endline "You did not enter a valid command"
 
 let () = main ()
