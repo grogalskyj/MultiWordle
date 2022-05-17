@@ -254,7 +254,7 @@ let word_search () =
      adventure by typing small, medium or large, to determine the size \
      of your word search game."
 
-(* let play_greedy_game () = *)
+let play_greedy_game () = failwith "Unimplemented"
 
 let play_greedy () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
@@ -274,8 +274,8 @@ let play_greedy () =
      or down without moving off the grid or revisiting a visited cell. \
      Your final score is your coin efficiency, that is the number of \
      coins you collected divided by the number of steps you took \
-     during the game."
-(* play_greedy_game () *)
+     during the game.";
+  play_greedy_game ()
 
 let main () =
   ANSITerminal.print_string [ ANSITerminal.red ] "ARCADE";
