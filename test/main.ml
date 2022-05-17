@@ -153,9 +153,9 @@ let data_processing_tests =
 let word_length = 5
 let st1 = init_game_state word_length
 let new_guess1 = "epoxy"
-let st2 = update_game_state st1 new_guess1
+let st2 = update_game_state st1 new_guess1 false 0 0
 let new_guess2 = st2.word
-let st3 = update_game_state st2 new_guess2
+let st3 = update_game_state st2 new_guess2 false 0 0
 let st4 = { st3 with remaining_guesses = 0 }
 
 let state_tests =
