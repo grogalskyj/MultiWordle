@@ -63,9 +63,9 @@ let games_played_test
     (Storage.games_played username player_database)
     ~printer:pp_int
 
-(** [average_guesses_test player expected_output] constructs an OUnit
-    test named [name] that assets the quality of [expected_output] with
-    [Storage.get_average_guesses player]*)
+(** [average_guesses_test name player expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Storage.get_average_guesses player]*)
 let average_guesses_test
     (name : string)
     (player : player)
@@ -75,9 +75,9 @@ let average_guesses_test
     (Storage.get_average_guesses player)
     ~printer:pp_int
 
-(** [guess_trend_test guess_list expected_output] constructs an OUnit
-    test named [name] that assets the quality of [expected_output] with
-    [Storage.guess_trend guess_list]*)
+(** [guess_trend_test name guess_list expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Storage.guess_trend guess_list]*)
 let guess_trend_test
     (name : string)
     (guess_list : int list)
@@ -87,12 +87,26 @@ let guess_trend_test
     (Storage.guess_trend guess_list)
     ~printer:pp_int
 
-let check_start_game_tst
+(** [check_start_game_test name input expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.check_start_game input]*)
+let check_start_game_test
     (name : string)
     (input : char)
     (expected_output : bool) : test =
   name >:: fun _ ->
   assert_equal expected_output (check_start_game input)
+
+(** [generate_word_bank_test name input expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.generate_word_bank n d]*)
+let generate_word_bank_test
+    (name : string)
+    (n : int)
+    (d : string list)
+    (expected_output : string list) : test =
+  name >:: fun _ ->
+  assert_equal expected_output (generate_word_bank n d)
 
 let dic =
   Yojson.Basic.from_file "dictionary.json"
@@ -133,19 +147,27 @@ let scoring_tests =
     score_input_test "3 letter correct word" "bed" "bed" "BED";
   ]
 
+let empty_testing_dic = []
+let testing_dic = [ "bed"; "came"; "bee"; "loud" ]
+
 let data_processing_tests =
   [
-    check_start_game_tst
+    check_start_game_test
       "This tests the specification that if the user wants to start \
        the game by pressing 's', the function returns true"
       's' true;
-    check_start_game_tst
+    check_start_game_test
       "This tests that if the user doesn't pass in s, the game does \
        not start"
       'b' false;
-    (* generate_word_bank_test "Tests if all words generated in list are
-       of length 5" word_bank 5 true; generate_word_bank_test "Tests for
-       really long strinngs are all same lenght" word_bank 14 true; *)
+    generate_word_bank_test "empty dic" 3 empty_testing_dic
+      empty_testing_dic;
+    generate_word_bank_test
+      "generating a non-empty word bank for 3 letter words" 3
+      testing_dic [ "bed"; "bee" ];
+    generate_word_bank_test
+      "generating a non-empty word bank for 4 letter words" 4
+      testing_dic [ "came"; "loud" ];
     choose_random_word_test
       "Check if words are they same... they shouldn't be..." dic false;
   ]

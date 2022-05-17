@@ -233,6 +233,23 @@ let rec play_wordle_game
       | "Y" -> play_wordle_game num_letters database
       | _ -> ignore end_state)
   | "two player" ->
+      (* ( (*start parenthesis*) print_endline "Please enter the
+         username Player 1 wishes to utilize. "; print_string "> "; let
+         p1username = read_line () in ( let p1 =
+
+         try List.assoc p1username database with | _ -> ( print_endline
+         "User not found. Press T to try again or C to create a new user
+         profile"; let next_step = read_line () in match next_step with
+         | "C" -> ( print_endline "Please enter a password for this
+         profile"; let p1password = read_line () in let new_player =
+         make_player p1username p1password in ignore (update_database
+         username new_player database); new_player | _ -> make_player ""
+         "")
+
+         )
+
+         in if p1.username = "" then play_wordle_game num_letters
+         database else *)
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nTWO PLAYER INSTRUCTIONS\n";
       print_endline
@@ -250,6 +267,9 @@ let rec play_wordle_game
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
+      (* ) *)
+
+      (* )End Parenthesis *)
   | "absurdle" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nABSURDLE INSTRUCTIONS\n";
