@@ -26,3 +26,20 @@ let rec generate_randomly_filled_grid
     generate_randomly_filled_list columns lower_bound upper_bound
     :: generate_randomly_filled_grid (rows - 1) columns lower_bound
          upper_bound
+
+let rec print_list (list : int list) =
+  match list with
+  | [] -> print_string "\n\n\n"
+  | [ h ] ->
+      print_string (string_of_int h);
+      print_list []
+  | h :: t ->
+      print_string (string_of_int h ^ "   ");
+      print_list t
+
+let rec print_grid (grid : t) =
+  match grid with
+  | [] -> print_string "\n"
+  | h :: t ->
+      print_list h;
+      print_grid t

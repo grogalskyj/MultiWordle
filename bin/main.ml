@@ -2,7 +2,7 @@ open Game
 open Data_processing
 open State
 open Scoring
-(* open Wager *)
+open Grid
 
 let alphabet =
   [
@@ -254,7 +254,9 @@ let word_search () =
      adventure by typing small, medium or large, to determine the size \
      of your word search game."
 
-let play_greedy_game () = failwith "Unimplemented"
+let play_greedy_game () =
+  let grid = generate_randomly_filled_grid 9 9 1 9 in
+  print_grid grid
 
 let play_greedy () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
@@ -274,7 +276,7 @@ let play_greedy () =
      or down without moving off the grid or revisiting a visited cell. \
      Your final score is your coin efficiency, that is the number of \
      coins you collected divided by the number of steps you took \
-     during the game.";
+     during the game.\n";
   play_greedy_game ()
 
 let main () =
