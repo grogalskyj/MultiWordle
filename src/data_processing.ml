@@ -147,16 +147,16 @@ let rec hide_words_in_board
 
 let make_game_board (hidden_words : string list) : char list list =
   match List.length hidden_words with
-  | 4 -> fill_in_board 10 []
-  | 5 -> fill_in_board 10 []
-  | 6 -> fill_in_board 10 []
-  | 7 -> fill_in_board 10 []
-  | 8 -> fill_in_board 15 []
-  | 9 -> fill_in_board 15 []
-  | 10 -> fill_in_board 15 []
-  | 11 -> fill_in_board 15 []
-  | 12 -> fill_in_board 20 []
-  | 13 -> fill_in_board 20 []
-  | 14 -> fill_in_board 20 []
-  | 15 -> fill_in_board 20 []
+  | 4 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
+  | 5 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
+  | 6 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
+  | 7 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
+  | 8 -> fill_in_board 15 [] |> hide_words_in_board hidden_words
+  | 9 -> fill_in_board 15 [] |> hide_words_in_board hidden_words
+  | 10 -> fill_in_board 15 [] |> hide_words_in_board hidden_words
+  | 11 -> fill_in_board 15 [] |> hide_words_in_board hidden_words
+  | 12 -> fill_in_board 20 [] |> hide_words_in_board hidden_words
+  | 13 -> fill_in_board 20 [] |> hide_words_in_board hidden_words
+  | 14 -> fill_in_board 20 [] |> hide_words_in_board hidden_words
+  | 15 -> fill_in_board 20 [] |> hide_words_in_board hidden_words
   | _ -> failwith "too many words :0"
