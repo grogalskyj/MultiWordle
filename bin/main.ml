@@ -205,6 +205,7 @@ let rec play_wordle_game
 
       let end_state = game_iter_one (init_game_state num_letters) in
       update_player 1 1 existing_player;
+      (*FIX 1 1*)
       print_string "Here are your summary statistics.";
       print_endline ("Username: " ^ existing_player.username);
       print_endline
