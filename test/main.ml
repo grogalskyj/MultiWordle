@@ -6,6 +6,38 @@ open Data_processing
 open Storage
 open Player
 
+(*TEST PLAN: The main goal of our testing efforts were to make sure that
+  the core functions required for each of the games we developed worked
+  effectively. These functions ranged from scoring a string input
+  against a chosen word for how similar their characters were (in the
+  case of Wordle), to checking that certain conditions be true in the
+  game over stages for a given game.
+
+  The testing suite below uses OUnit to test the following main
+  features, which were designed through a mix of black box and glass box
+  testing. (By this, we mean that certain larger picture features such
+  as game termination were testing based on their specification, whereas
+  more specific features like scoring input were testing by assessing
+  all possible acceptable input combinations): - Wordle inputs are
+  scored properly - Player profile can be made and updated properly -
+  Player statistics can be generated accurately - Word banks and "grids"
+  can be created properly - Certain conditions (such as running out of
+  lives) go hand in hand with the game being terminated, also known as
+  Game Over.
+
+  Outside of this testing suite, we used manual testing to test the
+  following: - That the user interface displayed text in the proper
+  colors and orientations - That the instructions were clear and the
+  game stages could be progressed through - That printed outputs such as
+  summary statistics were actually being output by the program
+
+  Correctness of our system: As a terminal-based arcade, we felt that
+  testing our product had to be achieved through both OUnit and manual
+  testing, as some features (as outlined above) made more sense to test
+  in one method vs the other. We believe that our extensive game play
+  testing and OUnit test cases combine to provide a comprehensive test
+  on our system, which we now believe is correct. *)
+
 (** [pp_string s] pretty-prints string [s]. *)
 let pp_string s = "\"" ^ s ^ "\""
 
@@ -373,5 +405,3 @@ let suite =
          ]
 
 let _ = run_test_tt_main suite
-
-(* Testing for state *)
