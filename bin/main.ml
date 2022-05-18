@@ -5,6 +5,7 @@ open Scoring
 open Storage
 open Player
 open Grid
+open Greedy_state
 
 let alphabet =
   [
@@ -35,6 +36,12 @@ let alphabet =
     'n';
     'm';
   ]
+
+type move_direction =
+  | Left
+  | Right
+  | Up
+  | Down
 
 let rec game_iter_one (game_state : state) : state =
   print_endline "\nYour guess: ";
@@ -288,13 +295,52 @@ let word_search () =
   print_endline
     "Welcome to Wordsearch! Your objective is to spot all the words \
      hidden in the grid of letters. When you find a word, type it into \
-     the terminal.When you find all the words, you win! Begin your \
+     the terminal. When you find all the words, you win! Begin your \
      adventure by typing small, medium or large, to determine the size \
      of your word search game."
 
-let play_greedy_game () =
-  let grid = generate_randomly_filled_int_grid 9 9 1 9 in
-  print_int_grid grid
+let check_greedy_game_ending (greedy_state : greedy_state) : bool =
+  if
+    (greedy_state.row_pos - 1 < 0
+    || get greedy_state.visited_grid
+         (greedy_state.row_pos - 1)
+         greedy_state.col_pos)
+    && (greedy_state.row_pos + 1 > 8
+       || get greedy_state.visited_grid
+            (greedy_state.row_pos + 1)
+            greedy_state.col_pos)
+    && (greedy_state.col_pos - 1 < 0
+       || get greedy_state.visited_grid greedy_state.row_pos
+            (greedy_state.col_pos - 1))
+    && (greedy_state.col_pos + 1 > 8
+       || get greedy_state.visited_grid greedy_state.row_pos
+            (greedy_state.col_pos + 1))
+  then (
+    print_endline
+      ("You cannot move left, right, up, or down, so the game is over. \
+        Your final coin efficiency was: "
+      ^ string_of_float
+          (float_of_int greedy_state.coins_collected
+          /. float_of_int greedy_state.steps_taken));
+    true)
+  else false
+
+let rec play_greedy_iter (greedy_state : greedy_state) =
+  if check_greedy_game_ending greedy_state = false then (
+    print_game_grid greedy_state;
+    print_endline
+      "Please enter \"left\", \"right\", \"up\", or \"down\" to move";
+    print_string "> ";
+    let next_move = read_line () in
+    match String.lowercase_ascii next_move with
+    | "left" -> play_greedy_iter (update_greedy_state greedy_state Left)
+    | "right" ->
+        play_greedy_iter (update_greedy_state greedy_state Right)
+    | "up" -> play_greedy_iter (update_greedy_state greedy_state Up)
+    | "down" -> play_greedy_iter (update_greedy_state greedy_state Down)
+    | _ ->
+        print_endline "Invalid command entered. Please try again.";
+        play_greedy_iter greedy_state)
 
 let play_greedy () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
@@ -315,7 +361,7 @@ let play_greedy () =
      Your final score is your coin efficiency, that is the number of \
      coins you collected divided by the number of steps you took \
      during the game.\n";
-  play_greedy_game ()
+  play_greedy_iter (init_greedy_state ())
 
 let main () : unit =
   let database = init_database in
