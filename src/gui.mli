@@ -1,1 +1,0 @@
-(* val open_display : unit *)

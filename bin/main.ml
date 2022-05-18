@@ -4,9 +4,12 @@ open State
 open Scoring
 open Storage
 open Player
+<<<<<<< HEAD
 open Word_search_state
 
 (* open Wager *)
+=======
+>>>>>>> 89878092401de009326e3fd7a038fe0a8a76dded
 open Grid
 
 let alphabet =
@@ -40,6 +43,8 @@ let alphabet =
   ]
 
 let rec game_iter_one (game_state : state) : state =
+  print_endline
+    ("Remaining guesses: " ^ string_of_int game_state.remaining_guesses);
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
@@ -52,21 +57,27 @@ let rec game_iter_one (game_state : state) : state =
     game_iter_one game_state)
   else (
     print_colored_feedback (score_input guess game_state.word);
-    let new_game_state = update_game_state game_state guess in
+    let new_game_state = update_game_state game_state guess false 0 0 in
     print_word_bank new_game_state alphabet;
     if check_game_over new_game_state = false then
       game_iter_one new_game_state
-    else new_game_state)
+    else
+      let final_game_state =
+        update_game_state new_game_state guess true
+          (String.length new_game_state.word)
+          (6 - new_game_state.remaining_guesses)
+      in
+      final_game_state)
 
 let rec game_iter_two_state_update (game_state : state) : unit =
   print_string "> ";
   let input_word = read_line () in
   if String.length input_word <> String.length game_state.word then (
     print_endline
-      "You did not enter a string of valid length. Please try again.";
+      "You did not enter a string of valid length. Please try again. ";
     game_iter_two_state_update game_state)
   else if is_word input_word game_state.dictionary = false then (
-    print_endline "You did not enter a valid word. Please try again.";
+    print_endline "You did not enter a valid word. Please try again. ";
     game_iter_two_state_update game_state)
   else game_state.word <- input_word
 
@@ -143,6 +154,7 @@ let generate_devious_word (game_state : state) : string =
   else List.hd devious_word_bank
 
 let rec game_iter_absurdle (game_state : state) =
+  print_endline (string_of_int game_state.remaining_guesses);
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
@@ -154,7 +166,7 @@ let rec game_iter_absurdle (game_state : state) =
     print_endline "You did not enter a valid word. Please try again.";
     game_iter_absurdle game_state)
   else
-    let new_game_state = update_game_state game_state guess in
+    let new_game_state = update_game_state game_state guess false 0 0 in
     new_game_state.word <- generate_devious_word new_game_state;
     print_colored_feedback (score_input guess new_game_state.word);
     print_word_bank new_game_state alphabet;
@@ -174,7 +186,7 @@ let rec play_wordle_game
   match String.lowercase_ascii input with
   | "one player" -> (
       print_endline "Please enter the Username you wish to play under";
-      print_string "> :";
+      print_string "> ";
       let username = read_line () in
       let existing_player =
         try List.assoc username database
@@ -186,7 +198,7 @@ let rec play_wordle_game
           match next_move with
           | "C" ->
               print_endline "Please enter a password for this username";
-              print_string "> :";
+              print_string "> ";
               let password = read_line () in
 
               let new_player = make_player username password in
@@ -205,7 +217,8 @@ let rec play_wordle_game
          predetermined word.";
 
       let end_state = game_iter_one (init_game_state num_letters) in
-      update_player 1 1 existing_player;
+      update_player end_state.last_game_length
+        end_state.last_game_guesses existing_player;
       print_string "Here are your summary statistics.";
       print_endline ("Username: " ^ existing_player.username);
       print_endline
@@ -218,16 +231,32 @@ let rec play_wordle_game
       print_endline
         ("Average number of guesses needed for last three games: "
         ^ string_of_int (get_guess_trend existing_player));
+      summary_graph_maker existing_player;
       print_endline
         "Would you like to play again? Press Y for yes and N for no";
       print_string "> ";
       let continue = read_line () in
       match continue with
-      | "Y" ->
-          play_wordle_game num_letters database
-          (*CHANGE DATABASE TO UPDATED*)
+      | "Y" -> play_wordle_game num_letters database
       | _ -> ignore end_state)
   | "two player" ->
+      (* ( (*start parenthesis*) print_endline "Please enter the
+         username Player 1 wishes to utilize. "; print_string "> "; let
+         p1username = read_line () in ( let p1 =
+
+         try List.assoc p1username database with | _ -> ( print_endline
+         "User not found. Press T to try again or C to create a new user
+         profile"; let next_step = read_line () in match next_step with
+         | "C" -> ( print_endline "Please enter a password for this
+         profile"; let p1password = read_line () in let new_player =
+         make_player p1username p1password in ignore (update_database
+         username new_player database); new_player | _ -> make_player ""
+         "")
+
+         )
+
+         in if p1.username = "" then play_wordle_game num_letters
+         database else *)
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nTWO PLAYER INSTRUCTIONS\n";
       print_endline
@@ -245,6 +274,9 @@ let rec play_wordle_game
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
+      (* ) *)
+
+      (* )End Parenthesis *)
   | "absurdle" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nABSURDLE INSTRUCTIONS\n";
@@ -318,8 +350,8 @@ let word_search () =
   with _ -> print_endline "You did not enter a valid command"
 
 let play_greedy_game () =
-  let grid = generate_randomly_filled_grid 9 9 1 9 in
-  print_grid grid
+  let grid = generate_randomly_filled_int_grid 9 9 1 9 in
+  print_int_grid grid
 
 let play_greedy () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
@@ -348,15 +380,15 @@ let main () : unit =
   ANSITerminal.print_string [ ANSITerminal.red ]
     "\n\
     \ Welcome to our Arcade. To begin, please enter the name of the \
-     Username you wish to use.";
+     Username you wish to use. ";
 
-  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
 
   let username = read_line () in
   ANSITerminal.print_string [ ANSITerminal.red ]
-    "\n Now please enter a Password for this user profile.";
+    "\n Now please enter a Password for this user profile. ";
 
-  ANSITerminal.print_string [ ANSITerminal.red ] "> :";
+  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
 
   let password = read_line () in
   let new_player = Player.make_player username password in
@@ -364,8 +396,8 @@ let main () : unit =
   let new_database = update_database username new_player database in
   ANSITerminal.print_string [ ANSITerminal.red ]
     "Please Choose from the following games modes: | MultiWordle | \
-     Word Search | Greedy";
-  print_string "> ";
+     Word Search | Greedy ";
+  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
 
   let s = read_line () in
   match String.lowercase_ascii s with
