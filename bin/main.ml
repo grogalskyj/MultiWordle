@@ -4,12 +4,9 @@ open State
 open Scoring
 open Storage
 open Player
-<<<<<<< HEAD
 open Word_search_state
 
 (* open Wager *)
-=======
->>>>>>> 89878092401de009326e3fd7a038fe0a8a76dded
 open Grid
 
 let alphabet =
@@ -330,7 +327,7 @@ let map_num_letters (size : string) : string =
 let play_word_search_game (size : string) : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nGAME MODE\n";
   print_endline
-    ("hidden in the above grid are" ^ map_num_letters size
+    ("hidden in the above grid are " ^ map_num_letters size
    ^ " letters. Type \n\
      \ in the terminal below until you find all the letters");
   let game_state = init_wordsearch_game_state size in

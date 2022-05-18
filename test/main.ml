@@ -141,11 +141,10 @@ let is_word_test
     with [Dataprocessing.make_hidden_words size dic]*)
 let make_hidden_words_test
     (name : string)
-    (size : string)
-    (dic : string list)
-    (expected_output : string list) =
-  name >:: fun _ ->
-  assert_equal expected_output (make_hidden_words size dic)
+    (n : string)
+    (d : string list)
+    (expected_output : string list) : test =
+  name >:: fun _ -> assert_equal expected_output (make_hidden_words n d)
 
 let dic =
   Yojson.Basic.from_file "dictionary.json"
@@ -311,6 +310,33 @@ let storage_tests =
     guess_trend_test "more than three guesses" [ 3; 4; 6; 7 ] 4;
   ]
 
+(*-----------------------------------------------------------------------------------*)
+(*------------------------------------Testing for Word
+  Search------------------------*)
+(*-----------------------------------------------------------------------------------*)
+
+let word_search_dic =
+  [
+    "bed";
+    "came";
+    "bee";
+    "loud";
+    "camera";
+    "home";
+    "repos";
+    "coin";
+    "game";
+  ]
+
+let word_search_test =
+  [
+    make_hidden_words_test
+      "test if make_hidden_words test with small game returns correct \
+       number of hidden words"
+      "small" word_search_dic
+      [ "bee"; "home"; "coin"; "came" ];
+  ]
+
 let suite =
   "test suite for MultiWordle"
   >::: List.flatten
@@ -320,6 +346,7 @@ let suite =
            data_processing_tests;
            storage_tests;
            player_tests;
+           word_search_test;
          ]
 
 let _ = run_test_tt_main suite

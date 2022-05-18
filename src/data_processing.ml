@@ -28,18 +28,25 @@ let rec get_filtered_words (dic : string list) : string =
   if String.length proposed_word < 5 then proposed_word
   else get_filtered_words dic
 
-let generate_hidden_words (size : int) (dic : string list) : string list
-    =
-  let return_list = [] in
-  if List.length return_list = size then return_list
-  else get_filtered_words dic :: return_list
+let rec generate_hidden_words
+    (size : int)
+    (dic : string list)
+    (word_list : string list) : string list =
+  if List.length word_list = size then word_list
+  else
+    let word_list = get_filtered_words dic :: word_list in
+    generate_hidden_words size dic word_list
 
 let make_hidden_words (size : string) (dic : string list) : string list
-    =
+    (* make_hidden_words [s d] selects 4 words out of dictionary d
+       randomly of if s = 'small', 8 words out of dic d randomly if s =
+       'medium', or 12 words out of dictionary d randomly if s =
+       'large'. Otherwise, throws an exception (formally not
+       possible) *) =
   match size with
-  | "small" -> generate_hidden_words 4 dic
-  | "medium" -> generate_hidden_words 8 dic
-  | "large" -> generate_hidden_words 12 dic
+  | "small" -> generate_hidden_words 4 dic []
+  | "medium" -> generate_hidden_words 8 dic []
+  | "large" -> generate_hidden_words 12 dic []
   | _ -> failwith "not possible"
 
 let reverse_index (i : int) : char = Char.chr i
