@@ -225,6 +225,7 @@ let rec play_wordle_game
       print_endline
         ("Average number of guesses needed for last three games: "
         ^ string_of_int (get_guess_trend existing_player));
+      summary_graph_maker existing_player;
       print_endline
         "Would you like to play again? Press Y for yes and N for no";
       print_string "> ";

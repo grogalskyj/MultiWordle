@@ -30,3 +30,7 @@ val get_guess_trend : player -> int
 (** [get_guess_trend player] calculates the average number of guess it
     has taken a specific user to guess a word in their last 3 games
     played. *)
+
+val summary_graph_maker : player -> unit
+(** [summary_graph_maker user] outputs a summary graph to show the
+    user's guess history for each possible guess number. *)
