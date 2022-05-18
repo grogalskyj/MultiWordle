@@ -164,10 +164,6 @@ let rec hide_words_in_board
       | _ -> failwith "failure")
 
 let make_game_board (hidden_words : string list) : char list list =
-  (* make game board [h] takes in string list h and creates a word
-     search board that hides all words h insie the word search. The size
-     of the board is determined by the length of list h: returns: char
-     list list, the word search board*)
   match List.length hidden_words with
   | 4 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
   | 5 -> fill_in_board 10 [] |> hide_words_in_board hidden_words

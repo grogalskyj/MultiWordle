@@ -25,8 +25,8 @@ val init_greedy_state : unit -> greedy_state
 val update_greedy_state : greedy_state -> move_direction -> greedy_state
 (** [update_greedy_state g m] is [g], but with all necessary changes
     that result from moving to an adjacent cell in the direction
-    described by m. *)
+    described by [m]. *)
 
 val print_game_grid : greedy_state -> unit
-(** [print_game_grid g] prints out the gameplay grid so that any visited
-    elements are blue and any unvisited elements are white. *)
+(** [print_game_grid g] prints out the gameplay grid [g] so that any
+    visited elements are blue and any unvisited elements are white. *)

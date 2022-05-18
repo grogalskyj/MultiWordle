@@ -12,7 +12,7 @@ val score_input : string -> string -> string
     '_' if the given letter in the input string is not in correct_word.
     Examples: score_input "lover" "bands" will output "_ _ _ _ _",
     score_input "lover" "ocean" will output "o _ e _ _", score input_
-    "lover" "cover" will output "_ O V E R" *)
+    "lover" "cover" will output "_ O V E R". *)
 
 val print_colored_feedback : string -> unit
 (** [print_colored_feedback s] prints a color-coded representation of

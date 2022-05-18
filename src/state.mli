@@ -8,7 +8,6 @@ type state = {
   last_game_length : int;
   last_game_guesses : int;
 }
-
 (** The type state is a record that stores all the information for the
     current game being played. [word] is a string that stores the word
     that the player must guess, [remaining_guesses] is an int that

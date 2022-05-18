@@ -78,31 +78,3 @@ let rec print_colored_feedback (str : string) =
       ("The character "
       ^ String.make 1 (String.get str 0)
       ^ " is not a valid feedback character.")
-
-(* let feedback_helper user_input correct_word lives feedback= function
-   | "OUT OF LIVES" -> "You guessed "^user_input^". The correct word was
-   "^correct_word^". You are out of lives. GAME OVER." | "YOU WIN" ->
-   "You guessed the word "^correct_word^" with " ^string_of_int lives^"
-   lives remaining. YOU WIN!" | "KEEP GOING" ->"You guessed the word
-   "^user_input^". Here is your feedback: "^feedback^". You have
-   "^string_of_int lives^" lives remaining." | _ -> "Something weird
-   happened here..." *)
-
-(* let give_feedback game_state user_input correct_word = raise (Failure
-   "Unimplemented: game_state") *)
-
-(* if game_state.remaining_guesses = 0 then feedback_helper "OUT OF
-   LIVES" else if game_state.remaining_guesses >= 0 &&
-   String.lowercase_ascii user_input <> String.lowercase_ascii
-   correct_word then feedback_helper "KEEP GOING" else feedback_helper
-   "YOU WIN" *)
-
-(**Intended Messages
-
-   OUT OF LIVES: You guessed ___. The correct word was ___. You are out
-   of lives. GAME OVER.
-
-   YOU WIN: You guessed the word ___ with ___ lives remaining! YOU WIN.
-
-   KEEP GOING: You guessed ___. Here is your feedback: ___. You have ___
-   guesses remaining. *)
