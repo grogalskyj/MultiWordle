@@ -321,13 +321,23 @@ let check_greedy_game_ending (greedy_state : greedy_state) : bool =
         Your final coin efficiency was: "
       ^ string_of_float
           (float_of_int greedy_state.coins_collected
-          /. float_of_int greedy_state.steps_taken));
+          /. float_of_int greedy_state.steps_taken)
+      ^ "\n\n");
     true)
   else false
 
 let rec play_greedy_iter (greedy_state : greedy_state) =
   if check_greedy_game_ending greedy_state = false then (
     print_game_grid greedy_state;
+    print_endline
+      ("Current coin count: "
+      ^ string_of_int greedy_state.coins_collected);
+    print_endline
+      ("Current steps taken: " ^ string_of_int greedy_state.steps_taken);
+    print_endline
+      ("You must take "
+      ^ string_of_int greedy_state.remaining_moves
+      ^ "steps before collecting next coins.");
     print_endline
       "Please enter \"left\", \"right\", \"up\", or \"down\" to move";
     print_string "> ";
