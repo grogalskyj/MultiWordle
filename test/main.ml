@@ -143,8 +143,16 @@ let make_hidden_words_test
     (name : string)
     (n : string)
     (d : string list)
-    (expected_output : string list) : test =
-  name >:: fun _ -> assert_equal expected_output (make_hidden_words n d)
+    (expected_output : int) : test =
+  name >:: fun _ ->
+  assert_equal expected_output (List.length (make_hidden_words n d))
+
+let make_game_board_test
+    (name : string)
+    (words : string list)
+    (expected_output : int) : test =
+  name >:: fun _ ->
+  assert_equal expected_output (List.length (make_game_board words))
 
 let dic =
   Yojson.Basic.from_file "dictionary.json"
@@ -333,8 +341,23 @@ let word_search_test =
     make_hidden_words_test
       "test if make_hidden_words test with small game returns correct \
        number of hidden words"
-      "small" word_search_dic
-      [ "bee"; "home"; "coin"; "came" ];
+      "small" word_search_dic 4;
+    make_hidden_words_test
+      "test if make_hidden_words test with medium game returns correct \
+       number of hidden words"
+      "medium" word_search_dic 8;
+    make_hidden_words_test
+      "test if make_hidden_words test with medium game returns correct \
+       number of hidden words"
+      "large" word_search_dic 12;
+    make_game_board_test
+      "test if game board is of correct size with small game (ie 10)"
+      [ "bed"; "came"; "bee"; "loud" ]
+      10;
+    make_game_board_test
+      "test if game board is of correct size with small game (ie 10)"
+      [ "bed"; "came"; "bee"; "loud"; "repos"; "home"; "coin"; "game" ]
+      15;
   ]
 
 let suite =
