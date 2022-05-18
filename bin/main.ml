@@ -430,27 +430,24 @@ let play_greedy () =
 let main () : unit =
   let database = init_database in
 
-  ANSITerminal.print_string [ ANSITerminal.red ]
-    "\n\
-    \ Welcome to our Arcade. To begin, please enter the name of the \
-     Username you wish to use. ";
-
-  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
+  ANSITerminal.print_string [ ANSITerminal.red ] "\nWELCOME TO ARCADE\n";
+  print_endline "To begin, please enter a username";
+  print_string "> ";
 
   let username = read_line () in
-  ANSITerminal.print_string [ ANSITerminal.red ]
-    "\n Now please enter a Password for this user profile. ";
 
-  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
+  print_endline "\nPlease enter a password for this user profile";
+  print_string "> ";
 
   let password = read_line () in
   let new_player = Player.make_player username password in
 
   let new_database = update_database username new_player database in
-  ANSITerminal.print_string [ ANSITerminal.red ]
-    "Please Choose from the following games modes: | MultiWordle | \
-     Word Search | Greedy ";
-  ANSITerminal.print_string [ ANSITerminal.red ] "> ";
+  print_endline
+    "\n\
+     Please choose from the following games modes: | MultiWordle | \
+     Word Search | Greedy";
+  print_string "> ";
 
   let s = read_line () in
   match String.lowercase_ascii s with
