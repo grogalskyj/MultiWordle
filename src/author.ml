@@ -1,4 +1,4 @@
-(*As of MS1*)
-let gar232 = 11
-let cw877 = 10
-let jak496 = 11
+(*As of MS3*)
+let gar232 = 40
+let cw877 = 40
+let jak496 = 40
