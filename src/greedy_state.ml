@@ -40,30 +40,36 @@ let update_greedy_state greedy_state move_direction =
     !new_row_pos < 0 || !new_row_pos > 8 || !new_col_pos < 0
     || !new_col_pos > 8
     || get greedy_state.visited_grid !new_row_pos !new_col_pos
-  then failwith "This cell cannot be entered";
+  then (
+    print_endline
+      "You cannot move in this direction because you are either \
+       visitng a nonexistent cell or a cell that has already been \
+       visited. Please try again.";
+    greedy_state)
+  else
+    let new_remaining_moves = ref (greedy_state.remaining_moves - 1) in
 
-  let new_remaining_moves = ref (greedy_state.remaining_moves - 1) in
-
-  let new_coins_collected = ref greedy_state.coins_collected in
-  if !new_remaining_moves = 0 then (
-    new_coins_collected :=
-      !new_coins_collected
-      + get greedy_state.grid !new_row_pos !new_col_pos;
-    new_remaining_moves :=
-      get greedy_state.grid !new_row_pos !new_col_pos);
-  let new_steps_taken = greedy_state.steps_taken + 1 in
-  let new_visited_grid =
-    update_grid greedy_state.visited_grid !new_row_pos !new_col_pos true
-  in
-  {
-    greedy_state with
-    visited_grid = new_visited_grid;
-    row_pos = !new_row_pos;
-    col_pos = !new_col_pos;
-    remaining_moves = !new_remaining_moves;
-    coins_collected = !new_coins_collected;
-    steps_taken = new_steps_taken;
-  }
+    let new_coins_collected = ref greedy_state.coins_collected in
+    if !new_remaining_moves = 0 then (
+      new_coins_collected :=
+        !new_coins_collected
+        + get greedy_state.grid !new_row_pos !new_col_pos;
+      new_remaining_moves :=
+        get greedy_state.grid !new_row_pos !new_col_pos);
+    let new_steps_taken = greedy_state.steps_taken + 1 in
+    let new_visited_grid =
+      update_grid greedy_state.visited_grid !new_row_pos !new_col_pos
+        true
+    in
+    {
+      greedy_state with
+      visited_grid = new_visited_grid;
+      row_pos = !new_row_pos;
+      col_pos = !new_col_pos;
+      remaining_moves = !new_remaining_moves;
+      coins_collected = !new_coins_collected;
+      steps_taken = new_steps_taken;
+    }
 
 let print_game_grid greedy_state =
   for r = 0 to 8 do
