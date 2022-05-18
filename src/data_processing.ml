@@ -43,18 +43,28 @@ let make_hidden_words (size : string) (dic : string list) : string list
   | _ -> failwith "not possible"
 
 let reverse_index (i : int) : char = Char.chr i
-let character = reverse_index (97 + Random.int 25)
 
-let rec add_char_array (board_size : int) (return_array : char list) =
+let rec add_char_array_helper
+    (board_size : int)
+    (return_array : char list) : char list =
   if List.length return_array = board_size then return_array
-  else character :: add_char_array board_size return_array
+  else
+    let new_array =
+      (let _ = Random.self_init () in
+       reverse_index (97 + Random.int 25))
+      :: return_array
+    in
+    add_char_array_helper board_size new_array
+
+let add_char_array (board_size : int) : char list =
+  add_char_array_helper board_size []
 
 let rec fill_in_board (board_size : int) (return_array : char list list)
     : char list list =
   if List.length return_array = board_size then return_array
   else
-    add_char_array board_size []
-    :: fill_in_board board_size return_array
+    let new_array = add_char_array board_size :: return_array in
+    fill_in_board board_size new_array
 
 let string_to_char_list s =
   let rec exp i l = if i < 0 then l else exp (i - 1) (s.[i] :: l) in
@@ -64,21 +74,21 @@ let add_char_front (char_list : char list) : char list =
   Char.chr (97 + Random.int 25) :: char_list
 
 let add_char_back (char_list : char list) : char list =
-  Char.chr (97 + Random.int 25) :: char_list
+  List.append char_list [ Char.chr (97 + Random.int 25) ]
 
 let rec fill_in_char_helper
     (original_list : char list)
     (desired_length : int)
-    (start_num : int) : char list =
-  if List.length original_list < List.length original_list + start_num
-  then
+    (start_num : int)
+    (orig_length : int) : char list =
+  if List.length original_list < orig_length + start_num then
     fill_in_char_helper
       (add_char_front original_list)
-      desired_length start_num
+      desired_length start_num orig_length
   else if List.length original_list < desired_length then
     fill_in_char_helper
       (add_char_back original_list)
-      desired_length start_num
+      desired_length start_num orig_length
   else original_list
 
 let fill_in_char_list
@@ -86,6 +96,7 @@ let fill_in_char_list
     (desired_length : int)
     (start_num : int) : char list =
   fill_in_char_helper original_list desired_length start_num
+    (List.length original_list)
 
 let rec create_new_matrix
     (old_char_array : char list)
@@ -97,7 +108,7 @@ let rec create_new_matrix
         new_char_array
         :: create_new_matrix old_char_array new_char_array t
       else h :: create_new_matrix old_char_array new_char_array t
-  | _ -> failwith "not possible"
+  | [] -> []
 
 let modify_horizontal_array
     (char_array : char list)
@@ -146,6 +157,10 @@ let rec hide_words_in_board
       | _ -> failwith "failure")
 
 let make_game_board (hidden_words : string list) : char list list =
+  (* make game board [h] takes in string list h and creates a word
+     search board that hides all words h insie the word search. The size
+     of the board is determined by the length of list h: returns: char
+     list list, the word search board*)
   match List.length hidden_words with
   | 4 -> fill_in_board 10 [] |> hide_words_in_board hidden_words
   | 5 -> fill_in_board 10 [] |> hide_words_in_board hidden_words

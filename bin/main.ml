@@ -4,6 +4,7 @@ open State
 open Scoring
 open Storage
 open Player
+open Word_search_state
 
 (* open Wager *)
 open Grid
@@ -284,6 +285,25 @@ let play_wordle (database : player_database) () : unit =
   try play_wordle_game (int_of_string s) database
   with _ -> print_endline "You did not enter a valid command"
 
+let game_iter_word_search (state : wordsearch_state) : unit =
+  print_endline (string_of_float state.start_time)
+
+let map_num_letters (size : string) : string =
+  match size with
+  | "small" -> string_of_int 4
+  | "medium" -> string_of_int 8
+  | "large" -> string_of_int 12
+  | _ -> failwith "not possible"
+
+let play_word_search_game (size : string) : unit =
+  ANSITerminal.print_string [ ANSITerminal.red ] "\n\nGAME MODE\n";
+  print_endline
+    ("hidden in the above grid are" ^ map_num_letters size
+   ^ " letters. Type \n\
+     \ in the terminal below until you find all the letters");
+  let game_state = init_wordsearch_game_state size in
+  game_iter_word_search game_state
+
 let word_search () =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
   print_endline
@@ -291,7 +311,11 @@ let word_search () =
      hidden in the grid of letters. When you find a word, type it into \
      the terminal.When you find all the words, you win! Begin your \
      adventure by typing small, medium or large, to determine the size \
-     of your word search game."
+     of your word search game.";
+  print_string "> ";
+  let s = read_line () in
+  try play_word_search_game s
+  with _ -> print_endline "You did not enter a valid command"
 
 let play_greedy_game () =
   let grid = generate_randomly_filled_grid 9 9 1 9 in
