@@ -45,10 +45,12 @@ let update_greedy_state greedy_state move_direction =
   let new_remaining_moves = ref (greedy_state.remaining_moves - 1) in
 
   let new_coins_collected = ref greedy_state.coins_collected in
-  if !new_remaining_moves = 0 then
+  if !new_remaining_moves = 0 then (
     new_coins_collected :=
-      get greedy_state.grid !new_row_pos !new_col_pos;
-  new_remaining_moves := get greedy_state.grid !new_row_pos !new_col_pos;
+      !new_coins_collected
+      + get greedy_state.grid !new_row_pos !new_col_pos;
+    new_remaining_moves :=
+      get greedy_state.grid !new_row_pos !new_col_pos);
   let new_steps_taken = greedy_state.steps_taken + 1 in
   let new_visited_grid =
     update_grid greedy_state.visited_grid !new_row_pos !new_col_pos true

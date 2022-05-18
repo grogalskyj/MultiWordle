@@ -391,7 +391,7 @@ let rec play_greedy_iter (greedy_state : greedy_state) =
     print_endline
       ("You must take "
       ^ string_of_int greedy_state.remaining_moves
-      ^ "steps before collecting next coins.");
+      ^ " steps before collecting next coins.");
     print_endline
       "Please enter \"left\", \"right\", \"up\", or \"down\" to move";
     print_string "> ";
