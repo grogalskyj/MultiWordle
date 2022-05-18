@@ -5,8 +5,6 @@ open Scoring
 open Storage
 open Player
 open Word_search_state
-
-(* open Wager *)
 open Grid
 open Greedy_state
 
@@ -277,9 +275,6 @@ let rec play_wordle_game
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
-      (* ) *)
-
-      (* )End Parenthesis *)
   | "absurdle" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nABSURDLE INSTRUCTIONS\n";
@@ -300,7 +295,6 @@ let rec play_wordle_game
   | _ ->
       print_endline "You did not enter a valid command";
       play_wordle_game num_letters database
-(*UPDATE TO HAVE NEW DATABASE*)
 
 let play_wordle (database : player_database) () : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
