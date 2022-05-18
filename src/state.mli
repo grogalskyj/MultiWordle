@@ -4,14 +4,9 @@ type state = {
   remaining_guesses : int;
   curr_guess : string;
   char_bank : char list;
-}
-
-type wordsearch_state = {
-  dictionary : string list;
-  hidden_words : string list;
-  found_words : string list;
-  start_time : float;
-  game_board : char list list;
+  game_over : bool;
+  last_game_length : int;
+  last_game_guesses : int;
 }
 
 (** The type state is a record that stores all the information for the
@@ -27,9 +22,9 @@ val init_game_state : int -> state
     English alphabet of length [n], and [curr_guess] set to the empty
     string. *)
 
-val update_game_state : state -> string -> state
-(** [update_game_state st g] is a state with one less guess than [st]
-    and with [curr_guess] set to [g]*)
+val update_game_state : state -> string -> bool -> int -> int -> state
+(** [update_game_state st g game_over length guesses] is a state with
+    one less guess than [st] and with [curr_guess] set to [g]*)
 
 val check_game_over : state -> bool
 (** [check_game_over st] is true if the player has guessed the word or
@@ -37,5 +32,3 @@ val check_game_over : state -> bool
 
 val to_string : state -> string
 (** [to_string s] is a string representation of a state*)
-
-val init_wordsearch_game_state : string -> wordsearch_state

@@ -9,7 +9,11 @@ open Player
 (** [pp_string s] pretty-prints string [s]. *)
 let pp_string s = "\"" ^ s ^ "\""
 
+(** [pp_int i] pretty-prints int [i]. *)
 let pp_int i = "\"" ^ string_of_int i ^ "\""
+
+(** [pp_bool b] pretty-prints bool [b]. *)
+let pp_bool b = "\"" ^ string_of_bool b ^ "\""
 
 (** [score_input_test name user_input correct_word start_index expected_output]
     constructs an OUnit test named [name] that assets the quality of
@@ -63,9 +67,9 @@ let games_played_test
     (Storage.games_played username player_database)
     ~printer:pp_int
 
-(** [average_guesses_test player expected_output] constructs an OUnit
-    test named [name] that assets the quality of [expected_output] with
-    [Storage.get_average_guesses player]*)
+(** [average_guesses_test name player expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Storage.get_average_guesses player]*)
 let average_guesses_test
     (name : string)
     (player : player)
@@ -75,9 +79,9 @@ let average_guesses_test
     (Storage.get_average_guesses player)
     ~printer:pp_int
 
-(** [guess_trend_test guess_list expected_output] constructs an OUnit
-    test named [name] that assets the quality of [expected_output] with
-    [Storage.guess_trend guess_list]*)
+(** [guess_trend_test name guess_list expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Storage.guess_trend guess_list]*)
 let guess_trend_test
     (name : string)
     (guess_list : int list)
@@ -87,12 +91,60 @@ let guess_trend_test
     (Storage.guess_trend guess_list)
     ~printer:pp_int
 
-let check_start_game_tst
+(** [check_start_game_test name input expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.check_start_game input]*)
+let check_start_game_test
     (name : string)
     (input : char)
     (expected_output : bool) : test =
   name >:: fun _ ->
   assert_equal expected_output (check_start_game input)
+
+(** [generate_word_bank_test name input expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.generate_word_bank n d]*)
+let generate_word_bank_test
+    (name : string)
+    (n : int)
+    (d : string list)
+    (expected_output : string list) : test =
+  name >:: fun _ ->
+  assert_equal expected_output (generate_word_bank n d)
+
+(** [choose_random_word_test name dic_list expected_output] constructs
+    an OUnit test named [name] that assets the quality of
+    [expected_output] with
+    [List.mem (Dataprocessing.choose_random_word dic_list) (dict_list)]*)
+let choose_random_word_test
+    (name : string)
+    (dic_list : string list)
+    (expected_output : bool) =
+  name >:: fun _ ->
+  assert_equal expected_output
+    (List.mem (choose_random_word dic_list) dic_list)
+    ~printer:pp_bool
+
+(** [is_word_test name w d expected_output] constructs an OUnit test
+    named [name] that assets the quality of [expected_output] with
+    [Dataprocessing.is_word w d]*)
+let is_word_test
+    (name : string)
+    (w : string)
+    (d : string list)
+    (expected_output : bool) =
+  name >:: fun _ ->
+  assert_equal expected_output (is_word w d) ~printer:pp_bool
+
+(** [make_hidden_words_test name size dic expected_output] constructs an
+    OUnit test named [name] that assets the quality of [expected_output]
+    with [Dataprocessing.make_hidden_words size dic]*)
+let make_hidden_words_test
+    (name : string)
+    (n : string)
+    (d : string list)
+    (expected_output : string list) : test =
+  name >:: fun _ -> assert_equal expected_output (make_hidden_words n d)
 
 let dic =
   Yojson.Basic.from_file "dictionary.json"
@@ -103,19 +155,6 @@ let rec check_word_length (word_list : string list) (len : int) =
   | h :: t ->
       if String.length h <> len then false else check_word_length t len
   | [] -> true
-
-(* let generate_word_bank_test (name : string) (dic : Yojson.Basic.t)
-   (num_letters : int) (expected_output : bool) = name >:: fun _ ->
-   assert_equal expected_output (check_word_length (dic |> make_dic |>
-   generate_word_bank num_letters) num_letters) *)
-
-let choose_random_word_test
-    (name : string)
-    (dic_list : string list)
-    (expected_output : bool) =
-  name >:: fun _ ->
-  assert_equal expected_output
-    (choose_random_word dic_list = choose_random_word dic_list)
 
 let scoring_tests =
   [
@@ -133,29 +172,48 @@ let scoring_tests =
     score_input_test "3 letter correct word" "bed" "bed" "BED";
   ]
 
+let empty_testing_dic = []
+let testing_dic = [ "bed"; "came"; "bee"; "loud" ]
+
 let data_processing_tests =
   [
-    check_start_game_tst
+    check_start_game_test
       "This tests the specification that if the user wants to start \
        the game by pressing 's', the function returns true"
       's' true;
-    check_start_game_tst
+    check_start_game_test
       "This tests that if the user doesn't pass in s, the game does \
        not start"
       'b' false;
-    (* generate_word_bank_test "Tests if all words generated in list are
-       of length 5" word_bank 5 true; generate_word_bank_test "Tests for
-       really long strinngs are all same lenght" word_bank 14 true; *)
+    generate_word_bank_test "empty dic" 3 empty_testing_dic
+      empty_testing_dic;
+    generate_word_bank_test
+      "generating a non-empty word bank for 3 letter words" 3
+      testing_dic [ "bed"; "bee" ];
+    generate_word_bank_test
+      "generating a non-empty word bank for 4 letter words" 4
+      testing_dic [ "came"; "loud" ];
+    choose_random_word_test "word is inside dictionary that is provided"
+      dic true;
     choose_random_word_test
-      "Check if words are they same... they shouldn't be..." dic false;
+      "word is inside an alternative dictionary: testing different \
+       words "
+      [ "a"; "b" ] true;
+    is_word_test "word belongs to the dictionary provided" "beach" dic
+      true;
+    is_word_test "word does not belong to the dictionary provided"
+      "beach"
+      [ "sharks"; "dictionary"; "elephants" ]
+      false
+    (*Not sure if can test generate hidden words yet*);
   ]
 
 let word_length = 5
 let st1 = init_game_state word_length
 let new_guess1 = "epoxy"
-let st2 = update_game_state st1 new_guess1
+let st2 = update_game_state st1 new_guess1 false 0 0
 let new_guess2 = st2.word
-let st3 = update_game_state st2 new_guess2
+let st3 = update_game_state st2 new_guess2 true 2 3
 let st4 = { st3 with remaining_guesses = 0 }
 
 let state_tests =
@@ -166,8 +224,18 @@ let state_tests =
       assert_equal 6 st1.remaining_guesses );
     ( "The current guess of newly-initiated state is the empty string"
     >:: fun _ -> assert_equal "" st1.curr_guess );
+    ( "The initial setting of the game over field of the state is false"
+    >:: fun _ -> assert_equal false st1.game_over );
+    ( "The initial setting for the last_game_length field is set to 0"
+    >:: fun _ -> assert_equal 0 st1.last_game_length );
+    ( "The initial setting for the last_game_guesses field is set to 0"
+    >:: fun _ -> assert_equal 0 st1.last_game_guesses );
     ( "Updating a game state does not change the designated word"
     >:: fun _ -> assert_equal st1.word st2.word );
+    ( "Updating a game state can change the last game length field"
+    >:: fun _ -> assert_equal 2 st3.last_game_length );
+    ( "Updating a game state can change the last game guesses field"
+    >:: fun _ -> assert_equal 3 st3.last_game_guesses );
     ( "Updating a game state reduces the number of guesses by 1"
     >:: fun _ ->
       assert_equal st2.remaining_guesses (st1.remaining_guesses - 1) );
@@ -180,6 +248,8 @@ let state_tests =
     >:: fun _ -> assert_equal true (check_game_over st3) );
     ( "A game is over if there are no remaining guesses" >:: fun _ ->
       assert_equal true (check_game_over st4) );
+    ( "When a game is over, the game_over field should be set to true"
+    >:: fun _ -> assert_equal true st4.game_over );
   ]
 
 let player1 = make_player "bananalover34" "monkey"
@@ -240,6 +310,33 @@ let storage_tests =
     guess_trend_test "more than three guesses" [ 3; 4; 6; 7 ] 4;
   ]
 
+(*-----------------------------------------------------------------------------------*)
+(*------------------------------------Testing for Word
+  Search------------------------*)
+(*-----------------------------------------------------------------------------------*)
+
+let word_search_dic =
+  [
+    "bed";
+    "came";
+    "bee";
+    "loud";
+    "camera";
+    "home";
+    "repos";
+    "coin";
+    "game";
+  ]
+
+let word_search_test =
+  [
+    make_hidden_words_test
+      "test if make_hidden_words test with small game returns correct \
+       number of hidden words"
+      "small" word_search_dic
+      [ "bee"; "home"; "coin"; "came" ];
+  ]
+
 let suite =
   "test suite for MultiWordle"
   >::: List.flatten
@@ -249,6 +346,7 @@ let suite =
            data_processing_tests;
            storage_tests;
            player_tests;
+           word_search_test;
          ]
 
 let _ = run_test_tt_main suite
