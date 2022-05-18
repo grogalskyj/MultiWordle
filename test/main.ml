@@ -47,16 +47,16 @@ let pp_int i = "\"" ^ string_of_int i ^ "\""
 (** [pp_bool b] pretty-prints bool [b]. *)
 let pp_bool b = "\"" ^ string_of_bool b ^ "\""
 
-(** [score_input_test name user_input correct_word start_index expected_output]
+(** [score_input_test name user_input correct_word start_index exp]
     constructs an OUnit test named [name] that assets the quality of
-    [expected_output] with [score_inout input]*)
+    [exp] with [score_inout input]*)
 let score_input_test
     (name : string)
     (user_input : string)
     (correct_word : string)
-    (expected_output : string) =
+    (exp : string) =
   name >:: fun _ ->
-  assert_equal expected_output
+  assert_equal exp
     (Scoring.score_input user_input correct_word)
     ~printer:pp_string
 
@@ -71,18 +71,18 @@ let make_player_test
   name >:: fun _ ->
   assert_equal expected_output (Player.make_player username password)
 
-(** [update_player_test name last_game_length last_game_guesses user expected_output]
+(** [update_player_test name last_game_length last_game_guesses user exp]
     constructs an OUnit test named [name] that assets the quality of
-    [expected_output] with
+    [exp] with
     [Player.update_player last_game_length last_game_guesses user]*)
 let update_player_test
     (name : string)
     (last_game_length : int)
     (last_game_guesses : int)
     (user : player)
-    (expected_output : unit) =
+    (exp : unit) =
   name >:: fun _ ->
-  assert_equal expected_output
+  assert_equal exp
     (Player.update_player last_game_length last_game_guesses user)
 
 (** [games_played_test name username player_database expected_output]
@@ -349,11 +349,6 @@ let storage_tests =
     guess_trend_test "three guesses" [ 2; 4; 6 ] 4;
     guess_trend_test "more than three guesses" [ 3; 4; 6; 7 ] 4;
   ]
-
-(*-----------------------------------------------------------------------------------*)
-(*------------------------------------Testing for Word
-  Search------------------------*)
-(*-----------------------------------------------------------------------------------*)
 
 let word_search_dic =
   [

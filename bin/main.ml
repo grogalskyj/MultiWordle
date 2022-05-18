@@ -156,7 +156,6 @@ let generate_devious_word (game_state : state) : string =
   else List.hd devious_word_bank
 
 let rec game_iter_absurdle (game_state : state) =
-  print_endline (string_of_int game_state.remaining_guesses);
   print_endline "\nYour guess: ";
   print_string "> ";
   let guess = read_line () in
