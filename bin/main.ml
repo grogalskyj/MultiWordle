@@ -321,15 +321,61 @@ let play_wordle (database : player_database) () : unit =
   try play_wordle_game (int_of_string s) database
   with _ -> print_endline "You did not enter a valid command"
 
-let game_iter_word_search (state : wordsearch_state) : unit =
-  print_endline (string_of_float state.start_time)
-
 let map_num_letters (size : string) : string =
   match size with
   | "small" -> string_of_int 4
   | "medium" -> string_of_int 8
   | "large" -> string_of_int 12
   | _ -> failwith "not possible"
+
+let rec print_matrix (game_board : char list list) : unit =
+  match game_board with
+  | [] -> print_endline ""
+  | h :: t ->
+      List.iter (Printf.printf "%c ") h;
+      print_endline "";
+      print_matrix t
+
+let rec check_word (guess : string) (hidden_words : string list) : bool
+    =
+  match hidden_words with
+  | [] -> false
+  | h :: t -> if guess = h then true else check_word guess t
+
+let update_state (guess : string) (game_state : wordsearch_state) :
+    wordsearch_state =
+  if check_word guess game_state.hidden_words then
+    let new_game_state =
+      { game_state with found_words = guess :: game_state.found_words }
+    in
+    new_game_state
+  else game_state
+
+let rec game_iter_word_search (game_state : wordsearch_state) : unit =
+  if
+    List.length game_state.hidden_words
+    - List.length game_state.found_words
+    = 0
+  then print_endline "Congrats! You Found all the Words!"
+    (* print_endline ("Time Elapsed: "^ string_of_float (Sys.time () -.
+       game_state.start_time)^ ""); *)
+  else (
+    print_matrix game_state.game_board;
+    print_endline
+      ("You have "
+      ^ string_of_int
+          (List.length game_state.hidden_words
+          - List.length game_state.found_words)
+      ^ " words left to find. \n\
+        \  Please type a word below when you find one");
+    print_endline "> ";
+    let guess = read_line () in
+    let new_state = update_state guess game_state in
+    if check_word guess game_state.hidden_words then (
+      print_endline " You guessed the word!";
+      game_iter_word_search new_state)
+    else print_endline "That's not a word in the dictionary";
+    game_iter_word_search new_state)
 
 let play_word_search_game (size : string) : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nGAME MODE\n";
