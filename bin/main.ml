@@ -5,8 +5,6 @@ open Scoring
 open Storage
 open Player
 open Word_search_state
-
-(* open Wager *)
 open Grid
 open Greedy_state
 
@@ -235,7 +233,6 @@ let rec play_wordle_game
       print_endline
         ("Average number of guesses needed for last three games: "
         ^ string_of_int (get_guess_trend existing_player));
-      summary_graph_maker existing_player;
       print_endline
         "Would you like to play again? Press Y for yes and N for no";
       print_string "> ";
@@ -278,9 +275,6 @@ let rec play_wordle_game
         (init_game_state num_letters)
         (init_game_state num_letters)
         0 0 1
-      (* ) *)
-
-      (* )End Parenthesis *)
   | "absurdle" ->
       ANSITerminal.print_string [ ANSITerminal.red ]
         "\nABSURDLE INSTRUCTIONS\n";
@@ -301,7 +295,6 @@ let rec play_wordle_game
   | _ ->
       print_endline "You did not enter a valid command";
       play_wordle_game num_letters database
-(*UPDATE TO HAVE NEW DATABASE*)
 
 let play_wordle (database : player_database) () : unit =
   ANSITerminal.print_string [ ANSITerminal.red ] "\n\nINSTRUCTIONS\n";
